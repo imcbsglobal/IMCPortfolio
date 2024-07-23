@@ -5,7 +5,7 @@ import { BiSolidFileImage } from "react-icons/bi";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { ref as dbRef, set, onValue, push } from "firebase/database";
 
-const UploadFile = () => {
+const UploadFile = ({ storagePath, dbPath }) => {
   const [imgUrl, setImgUrl] = useState('');
   const [fileName, setFileName] = useState('');
   const [isError, setIsError] = useState(false);
@@ -15,14 +15,14 @@ const UploadFile = () => {
   const inRef = useRef();
 
   useEffect(() => {
-    const imageRef = dbRef(db, 'images/latest');
+    const imageRef = dbRef(db, `${dbPath}/latest`);
     onValue(imageRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
         setImgUrl(data.url);
       }
     });
-  }, []);
+  }, [dbPath]);
 
   const selectImage = () => {
     inRef.current.click();
@@ -37,7 +37,7 @@ const UploadFile = () => {
   const handleImageUpload = () => {
     if (!file) return;
     setIsLoading(true);
-    const storageRef = ref(storage, `Images/${fileName}`);
+    const storageRef = ref(storage, `${storagePath}/${fileName}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     uploadTask.on('state_changed', (snapshot) => {
@@ -49,9 +49,9 @@ const UploadFile = () => {
     }, () => {
       getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
         setImgUrl(url);
-        const newImageRef = push(dbRef(db, 'images'));
+        const newImageRef = push(dbRef(db, dbPath));
         set(newImageRef, { url });
-        set(dbRef(db, 'images/latest'), { url });  // Set latest image
+        set(dbRef(db, `${dbPath}/latest`), { url });  // Set latest image
         setIsLoading(false);
       }).catch(() => {
         setIsError(true);
@@ -63,7 +63,7 @@ const UploadFile = () => {
   return (
     <div>
       <div className='flex justify-center items-center gap-10 mt-10'>
-        <input type="file" accept='image/*' ref={inRef} className='hidden' onChange={handleInputFile} />
+        <input type="file"  accept='image/*,video/*' ref={inRef} className='hidden' onChange={handleInputFile} />
         <button className='text-xl bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2' onClick={selectImage}>
           Select Image <span className='text-[#ff9019]'><BiSolidFileImage /></span>
         </button>
@@ -72,7 +72,7 @@ const UploadFile = () => {
         </button>
         {isLoading ? <span>Loading... {percentage}%</span> : <></>}
         {isError ? <span>Error uploading file</span> : <></>}
-        {imgUrl ?<h1>Uploaded Successfully</h1>: <></>}
+        {imgUrl ? <h1>Uploaded Successfully</h1> : <></>}
       </div>
     </div>
   );

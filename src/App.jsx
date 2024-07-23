@@ -1,4 +1,5 @@
 import Android from "./components/Android"
+import Brocher from "./components/Brocher"
 import Home from "./components/Home"
 import Introduction from "./components/Introduction"
 import Logos from "./components/Logos"
@@ -20,6 +21,7 @@ function App() {
         <Route path="/android" element={<Android />} />
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/logos" element={<Logos />} />
+        <Route path="/brochure" element={<Brocher/>} />
         <Route path="/posters" element={<Posters />} />
         <Route path="/video" element={<Video />} />
         <Route path="/websites" element={<Websites />} />

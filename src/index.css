@@ -78,6 +78,13 @@ img {
   font-family: 'Geometos', sans-serif;
   font-weight: 800;
 }
+.boxShadow1{
+  background: linear-gradient(135deg, rgb(255, 255, 255), rgb(255, 255, 255));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: .1px solid rgb(255, 255, 255);
+}
 /* .BorderColor{
   border-image: linear-gradient(135deg, rgba(255, 153, 0, 0.73), rgba(255, 255, 255, 0.707));
   border-width: 0.1px;
@@ -104,4 +111,18 @@ img {
   opacity: 1;
   transform: scale(1);
   animation: popUp 0.2s ease;
+}
+
+.boxShadow1:hover .Delete-View-Btn {
+  opacity: 1;
+  transform: scale(1);
+  animation: popUp 0.2s ease;
+}
+.popup{
+  backdrop-filter: blur(8px);
+  transition: all 2s ease-in-out;
+}
+.popup-content{
+  background: rgba(255, 255, 255, 0.978);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 }
