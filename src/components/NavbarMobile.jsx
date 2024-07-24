@@ -143,13 +143,13 @@ const NavbarMobile = ({setMenuBar}) => {
                                 className='pl-14 mt-2'
                             >
                                 <li className='mt-2'>
-                                    <Link to="/instagram" className='flex justify-start items-center gap-5'>
+                                    <Link to="/instagram" onClick={() => setMenuBar(false)} className='flex justify-start items-center gap-5'>
                                         <div className='text-[#ff9100]'><BsInstagram /></div>
                                         <div>Instagram</div>
                                     </Link>
                                 </li>
                                 <li className='mt-3'>
-                                    <Link to="/facebook" className='flex justify-start items-center gap-5'>
+                                    <Link to="/facebook" onClick={() => setMenuBar(false)} className='flex justify-start items-center gap-5'>
                                         <div className='text-[#ff9100]'><BiLogoFacebook /></div>
                                         <div>Facebook</div>
                                     </Link>
