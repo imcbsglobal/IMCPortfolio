@@ -64,10 +64,10 @@ const UploadFile = ({ storagePath, dbPath }) => {
     <div>
       <div className='flex justify-center items-center gap-10 mt-10'>
         <input type="file"  accept='image/*,video/*' ref={inRef} className='hidden' onChange={handleInputFile} />
-        <button className='text-xl bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2' onClick={selectImage}>
-          Select Image <span className='text-[#ff9019]'><BiSolidFileImage /></span>
+        <button className='md:text-xl text-sm  bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2' onClick={selectImage}>
+          Select<span className='text-[#ff9019]'><BiSolidFileImage /></span>
         </button>
-        <button onClick={handleImageUpload} className='flex items-center gap-2 text-xl bg-white px-8 py-2 rounded-xl shadow-lg font-bold text-[#343434]'>
+        <button onClick={handleImageUpload} className='flex items-center gap-2 md:text-xl text-sm bg-white px-8 py-2 rounded-xl shadow-lg font-bold text-[#343434]'>
           Upload <span className='text-[#ff9019]'><FaSquarePlus /></span>
         </button>
         {isLoading ? <span>Loading... {percentage}%</span> : <></>}

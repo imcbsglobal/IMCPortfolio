@@ -21,6 +21,8 @@ import { BsAndroid2 } from "react-icons/bs";
 import { Link } from 'react-router-dom';
 import { auth } from "./Firebase"
 import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { FaUserSlash } from "react-icons/fa";
+
 
 
 
@@ -67,7 +69,15 @@ const Navbar = () => {
                 <nav className='flex items-center justify-between px-8 mt-5 md:hidden'>
                     <div className=' flex items-center gap-5'>
                         <CgMenuLeftAlt onClick={() => setMenuBar(true)} className=' text-3xl cursor-pointer md:hidden text-[hsl(26,100%,50%)]'/>
-                        <FaUserCircle className=' text-3xl text-[#ff8400] md:hidden drop-shadow-md cursor-pointer'/>
+
+                        {user ? (
+                            <FaUserSlash className='text-3xl text-[#ff8400] md:hidden drop-shadow-md cursor-pointer' onClick={handleLogout}/>
+                        ) : (
+                            <Link to='/introduction'>
+                                <FaUserCircle className=' text-3xl text-[#ff8400] md:hidden drop-shadow-md cursor-pointer'/>
+                            </Link>
+                        )}
+                        
                         
                     </div>
                     <div className=' p-2'>

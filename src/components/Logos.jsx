@@ -4,11 +4,25 @@ import { ref, onValue, remove } from "firebase/database";
 import { ref as storageRef, deleteObject } from "firebase/storage";
 import UploadFile from './UploadFile';
 import ImageView from './ImageView';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './Firebase';
 
 const Logos = () => {
   const [logos, setLogos] = useState([]);
   const [selectedLogo, setSelectedLogo] = useState(null);
   const [showImageView, setShowImageView] = useState(false);
+  const [user, setUser] = useState(null);
+
+
+  // Is Admin Logined or Not
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+
 
   useEffect(() => {
     const dbRef = ref(db, 'logos');
@@ -55,17 +69,22 @@ const Logos = () => {
                 </div>
             </div>
 
-            <div>
-                <UploadFile storagePath="Logos" dbPath="logos" />
-            </div>
-
+            {user && (
+                <div>
+                  <UploadFile storagePath="Logos" dbPath="logos" />
+                </div>
+            )}
+            
             <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
                 {logos.map(({ key, url }) => (
                     <div key={key} className='h-[300px] w-full rounded-3xl boxShadow1 relative'>
                         <img src={url} alt="" onClick={() => handleView(url)} className='w-full h-full object-contain rounded-3xl' />
-                        <div className='absolute flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
-                            <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
-                        </div>
+                        {user && (
+                            <div className='absolute flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
+                              <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
+                            </div>
+                        )}
+                        
                     </div>
                 ))}
                 {showImageView && (

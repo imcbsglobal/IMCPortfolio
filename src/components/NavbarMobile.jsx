@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Logo from "../assets/IMC Logo.png"
 import { MdOutlineFacebook } from "react-icons/md";
 import { BiLogoInstagramAlt } from "react-icons/bi";
@@ -9,13 +9,30 @@ import { FaEarthAmericas } from "react-icons/fa6";
 import { RiPencilRulerFill } from "react-icons/ri";
 import { MdContacts } from "react-icons/md";
 import { IoCloseCircle } from "react-icons/io5";
+import { Link } from 'react-router-dom';
+import { PiVideoFill } from "react-icons/pi";
+import { BsAndroid2 } from "react-icons/bs";
+import { motion } from 'framer-motion';
+import { HiPencilAlt } from "react-icons/hi";
+import { PiBookOpenTextFill } from "react-icons/pi";
+import { PiPencilCircleBold } from "react-icons/pi";
+
+
+
+
 
 
 const NavbarMobile = ({setMenuBar}) => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+      };
+
   return (
     <div className=''>
 
-      <div className=' fixed top-0 left-0 h-full w-full bg-white z-[200] flex flex-col justify-center items-center gap-10'>
+      <div className=' fixed top-0 left-0 h-screen bottom-0 w-full bg-white z-[200] flex flex-col justify-center items-center gap-10'>
         <div className=' absolute top-10 right-10 text-3xl text-[#ff9100]  drop-shadow-sm cursor-pointer'>
             <IoCloseCircle onClick={() => setMenuBar(false)}/>
         </div>
@@ -34,28 +51,72 @@ const NavbarMobile = ({setMenuBar}) => {
             <div className=' flex justify-center text-center items-center'>
                 <ul className='flex flex-col gap-10 font-semibold'>
                     <li>
-                        <div className=' flex justify-center items-center gap-5'>
-                            <div className=' text-[#ff9100]'><FaHome/></div>
-                            <div>Home</div>
+                        <Link to='/' onClick={() => setMenuBar(false)}>
+                            <div className=' flex justify-center items-center gap-5'>
+                                <div className=' text-[#ff9100]'><FaHome/></div>
+                                <div>Home</div>
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='/websites' onClick={() => setMenuBar(false)}>
+                            <div className=' flex justify-center items-center gap-5'>
+                                <div className=' text-[#ff9100]'><FaEarthAmericas/></div>
+                                <div>Website Work</div>
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
+                    <div className='flex flex-col'>
+                            <div className='flex justify-center items-center gap-5 cursor-pointer' onClick={toggleDropdown}>
+                            <div className='text-[#ff9100]'><RiPencilRulerFill /></div>
+                            <div>Designs</div>
+                            </div>
+                            {isOpen && (
+                            <motion.ul
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className='pl-14 mt-2'
+                            >
+                                <li className='mt-2'>
+                                    <Link to="/posters" onClick={() => setMenuBar(false)} className='flex justify-start items-center gap-5'>
+                                        <div className='text-[#ff9100]'><HiPencilAlt /></div>
+                                        <div>Posters</div>
+                                    </Link>
+                                </li>
+                                <li className='mt-3'>
+                                    <Link to="/brochure" onClick={() => setMenuBar(false)} className='flex justify-start items-center gap-5'>
+                                        <div className='text-[#ff9100]'><PiBookOpenTextFill /></div>
+                                        <div>Brochure</div>
+                                    </Link>
+
+                                </li>
+                                <li className='mt-3'>
+                                    <Link to="/logos" onClick={() => setMenuBar(false)} className='flex justify-start items-center gap-5'>
+                                        <div className='text-[#ff9100]'><PiPencilCircleBold /></div>
+                                        <div>Logos</div>
+                                    </Link>
+                                </li>
+                            </motion.ul>
+                            )}
                         </div>
                     </li>
                     <li>
-                        <div className=' flex justify-center items-center gap-5'>
-                            <div className=' text-[#ff9100]'><FaEarthAmericas/></div>
-                            <div>Website Work</div>
-                        </div>
+                        <Link to='/android' onClick={() => setMenuBar(false)}>
+                            <div className=' flex justify-center items-center gap-5'>
+                                <div className=' text-[#ff9100]'><BsAndroid2/></div>
+                                <div>App</div>
+                            </div>
+                        </Link>
                     </li>
                     <li>
-                        <div className=' flex justify-center items-center gap-5'>
-                            <div className=' text-[#ff9100]'><RiPencilRulerFill/></div>
-                            <div>Post Work</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div className=' flex justify-center items-center gap-5'>
-                            <div className=' text-[#ff9100]'><MdContacts/></div>
-                            <div>Contact Us</div>
-                        </div>
+                        <Link to='/video' onClick={() => setMenuBar(false)}>
+                            <div className=' flex justify-center items-center gap-5'>
+                                <div className=' text-[#ff9100]'><PiVideoFill/></div>
+                                <div>Video</div>
+                            </div>
+                        </Link>
                     </li>
                 </ul>
             </div>
