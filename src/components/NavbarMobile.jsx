@@ -16,6 +16,10 @@ import { motion } from 'framer-motion';
 import { HiPencilAlt } from "react-icons/hi";
 import { PiBookOpenTextFill } from "react-icons/pi";
 import { PiPencilCircleBold } from "react-icons/pi";
+import { BsInstagram } from "react-icons/bs";
+import { BiLogoFacebook } from "react-icons/bi";
+import { GrMultimedia } from "react-icons/gr";
+
 
 
 
@@ -24,23 +28,30 @@ import { PiPencilCircleBold } from "react-icons/pi";
 
 const NavbarMobile = ({setMenuBar}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [socialOpen, setSocialOpen] = useState(false)
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
       };
 
+    // Social Media Drop Down
+    const toggleDropdown2 = () => {
+        setSocialOpen(!socialOpen)
+    }
+
+
   return (
     <div className=''>
 
-      <div className=' fixed top-0 left-0 h-screen bottom-0 w-full bg-white z-[200] flex flex-col justify-center items-center gap-10'>
+      <div className=' fixed top-0 left-0 h-[100vh] bottom-0 w-full bg-white z-[200] flex flex-col justify-center items-center gap-10'>
         <div className=' absolute top-10 right-10 text-3xl text-[#ff9100]  drop-shadow-sm cursor-pointer'>
             <IoCloseCircle onClick={() => setMenuBar(false)}/>
         </div>
         <div>
-                <div className=' w-[200px] h-auto mb-5 flex justify-center mx-auto'>
+                <div className=' w-[80px] h-auto mb-5 flex justify-center mx-auto'>
                     <img src={Logo} className=' w-full h-full object-contain drop-shadow-md' alt="" />
                 </div>
-                <div className=' text-center text-3xl font-semibold mb-10'>IMC Business Solution</div>
+                <div className=' text-center text-3xl font-semibold mb-5'>IMC Business Solution</div>
                 <div className=' flex justify-center items-center gap-10 mb-5 bg-white p-5 rounded-full BoxShadow'>
                     <div className=' text-xl'><MdOutlineFacebook/></div>
                     <div className=' text-xl'><BiLogoInstagramAlt/></div>
@@ -49,7 +60,7 @@ const NavbarMobile = ({setMenuBar}) => {
                 </div>
         </div>
             <div className=' flex justify-center text-center items-center'>
-                <ul className='flex flex-col gap-10 font-semibold'>
+                <ul className='flex flex-col gap-5 font-semibold'>
                     <li>
                         <Link to='/' onClick={() => setMenuBar(false)}>
                             <div className=' flex justify-center items-center gap-5'>
@@ -117,6 +128,36 @@ const NavbarMobile = ({setMenuBar}) => {
                                 <div>Video</div>
                             </div>
                         </Link>
+                    </li>
+                    <li>
+                        <div className='flex flex-col'>
+                            <div className='flex justify-center items-center gap-5 cursor-pointer' onClick={toggleDropdown2}>
+                            <div className='text-[#ff9100]'><GrMultimedia /></div>
+                            <div>Social Media</div>
+                            </div>
+                            {socialOpen && (
+                            <motion.ul
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className='pl-14 mt-2'
+                            >
+                                <li className='mt-2'>
+                                    <Link to="/instagram" className='flex justify-start items-center gap-5'>
+                                        <div className='text-[#ff9100]'><BsInstagram /></div>
+                                        <div>Instagram</div>
+                                    </Link>
+                                </li>
+                                <li className='mt-3'>
+                                    <Link to="/facebook" className='flex justify-start items-center gap-5'>
+                                        <div className='text-[#ff9100]'><BiLogoFacebook /></div>
+                                        <div>Facebook</div>
+                                    </Link>
+
+                                </li>
+                            </motion.ul>
+                            )}
+                        </div>
                     </li>
                 </ul>
             </div>

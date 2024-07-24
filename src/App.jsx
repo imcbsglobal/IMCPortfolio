@@ -1,6 +1,8 @@
 import Android from "./components/Android"
 import Brocher from "./components/Brocher"
+import Facebook from "./components/Facebook"
 import Home from "./components/Home"
+import Instagram from "./components/Instagram"
 import Introduction from "./components/Introduction"
 import Logos from "./components/Logos"
 import Navbar from "./components/Navbar"
@@ -25,6 +27,8 @@ function App() {
         <Route path="/posters" element={<Posters />} />
         <Route path="/video" element={<Video />} />
         <Route path="/websites" element={<Websites />} />
+        <Route path="/instagram" element={<Instagram/>} />
+        <Route path="/facebook" element={<Facebook/>} />
       </Routes>
     </Router>
   )

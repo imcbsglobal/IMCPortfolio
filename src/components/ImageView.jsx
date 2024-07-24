@@ -5,7 +5,7 @@ const ImageView = ({ url, onClose }) => {
   const isVideo = url.endsWith('.mp4') || url.endsWith('.mov'); // add more video extensions as needed
 
   return (
-    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-75 h-full w-full z-50">
+    <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-75 h-[100vh] w-full z-50">
       <button onClick={onClose} className="absolute top-4 right-4 text-white text-3xl">
         <FaTimes />
       </button>

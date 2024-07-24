@@ -13,16 +13,12 @@ const Android = () => {
   const [showImageView, setShowImageView] = useState(false);
   const [user, setUser] = useState(null);
 
-
-  // Is Admin Logined or Not
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
     return () => unsubscribe();
   }, []);
-
-
 
   useEffect(() => {
     const dbRef = ref(db, 'android');
@@ -31,7 +27,7 @@ const Android = () => {
       const fetchedImages = [];
       for (let key in data) {
         if (key !== 'latest') {
-          fetchedImages.push({ key, url: data[key].url });
+          fetchedImages.push({ key, url: data[key].url, playStoreLink: data[key].playStoreLink });
         }
       }
       setImages(fetchedImages);
@@ -77,14 +73,17 @@ const Android = () => {
             
 
             <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
-                {images.map(({ key, url }) => (
+                {images.map(({ key, url, playStoreLink }) => (
                     <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
                         <img src={url} alt="" onClick={() => handleView(url)} className='w-full h-full object-cover rounded-3xl'/>
-                        {user && (
-                            <div className='absolute flex justify-center items-center mx-auto bottom-5 left-10 md:left-[30%] Delete-View-Btn'>
+                        
+                            <div className='absolute flex justify-center items-center mx-auto bottom-5 left-5 Delete-View-Btn gap-5'>
+                            {user && (
                               <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
+                            )}
+                              <button onClick={() => window.open(playStoreLink, '_blank')} className='font-bold shadow-2xl px-8 py-2 rounded-3xl bg-white'>View</button>
                             </div>
-                        )}
+                       
                         
                     </div>
                 ))}
@@ -93,8 +92,6 @@ const Android = () => {
                 )}
             </div>
         </section>
-     
-      
     </div>
   );
 };

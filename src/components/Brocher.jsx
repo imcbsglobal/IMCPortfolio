@@ -3,18 +3,13 @@ import { db, storage } from "./Firebase";
 import { ref, onValue, remove } from "firebase/database";
 import { ref as storageRef, deleteObject } from "firebase/storage";
 import UploadFile from './UploadFile';
-import ImageView from './ImageView';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './Firebase';
 
 const Brochure = () => {
-  const [images, setImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [showImageView, setShowImageView] = useState(false);
+  const [pdfs, setPdfs] = useState([]);
   const [user, setUser] = useState(null);
 
-
-  // Is Admin Logined or Not
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -22,40 +17,31 @@ const Brochure = () => {
     return () => unsubscribe();
   }, []);
 
-
   useEffect(() => {
     const dbRef = ref(db, 'brochures');
     onValue(dbRef, (snapshot) => {
       const data = snapshot.val();
-      const fetchedImages = [];
+      console.log("Database Snapshot: ", data); // Log entire snapshot
+      const fetchedPdfs = [];
       for (let key in data) {
-        if (key !== 'latest') {
-          fetchedImages.push({ key, url: data[key].url });
+        if (key !== 'latest' && data[key].url.toLowerCase().endsWith('.pdf')) {
+          fetchedPdfs.push({ key, url: data[key].url });
         }
       }
-      setImages(fetchedImages);
+      console.log("Fetched PDFs: ", fetchedPdfs); // Log fetched PDFs
+      setPdfs(fetchedPdfs);
     });
   }, []);
 
   const handleDelete = async (key, url) => {
     try {
       await remove(ref(db, `brochures/${key}`));
-      const imageRef = storageRef(storage, `Brochures/${url.split('/').pop().split('?')[0]}`);
-      await deleteObject(imageRef);
-      setImages(images.filter(image => image.key !== key));
+      const fileRef = storageRef(storage, `Brochures/${url.split('/').pop().split('?')[0]}`);
+      await deleteObject(fileRef);
+      setPdfs(pdfs.filter(pdf => pdf.key !== key));
     } catch (error) {
-      console.error("Error deleting image:", error);
+      console.error("Error deleting PDF:", error);
     }
-  };
-
-  const handleView = (url) => {
-    setSelectedImage(url);
-    setShowImageView(true);
-  };
-
-  const handleCloseImageView = () => {
-    setShowImageView(false);
-    setSelectedImage(null);
   };
 
   return (
@@ -75,25 +61,18 @@ const Brochure = () => {
             )}
 
             <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
-                {images.map(({ key, url }) => (
+                {pdfs.map(({ key, url }) => (
                     <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
-                    <img src={url} alt="" onClick={() => handleView(url)} className='w-full h-full object-cover rounded-3xl' />
-
-                    {user && (
-                      <div className='absolute flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
-                        <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
-                      </div>
-                    )}
-                    
+                      <iframe src={url} title={`PDF Brochure ${key}`} className='w-full h-full rounded-3xl' />
+                      {user && (
+                        <div className='absolute flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
+                          <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
+                        </div>
+                      )}
                     </div>
                 ))}
-                {showImageView && (
-                    <ImageView url={selectedImage} onClose={handleCloseImageView} />
-                )}
             </div>
         </section>
-      
-      
     </div>
   );
 };

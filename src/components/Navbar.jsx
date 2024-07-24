@@ -22,7 +22,9 @@ import { Link } from 'react-router-dom';
 import { auth } from "./Firebase"
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { FaUserSlash } from "react-icons/fa";
-
+import { BsInstagram } from "react-icons/bs";
+import { BiLogoFacebook } from "react-icons/bi";
+import { GrMultimedia } from "react-icons/gr";
 
 
 
@@ -32,6 +34,8 @@ const Navbar = () => {
     const [menuBar, setMenuBar] = useState(false)
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const [socialOpen, setSocialOpen] = useState(false)
 
     const [user, setUser] = useState(null);
 
@@ -48,6 +52,11 @@ const Navbar = () => {
         setIsOpen(!isOpen);
       };
     
+// Social Media Drop Down
+    const toggleDropdown2 = () => {
+        setSocialOpen(!socialOpen)
+    }
+
 
     async function handleLogout(){
         try {
@@ -98,10 +107,10 @@ const Navbar = () => {
                     </Link>
                 </div>
                 )}
-                <div className=' w-[130px] h-auto mx-auto mb-5'>
+                <div className=' w-[80px] h-auto mx-auto mb-5'>
                     <img src={logo} className=' w-full h-full drop-shadow-md' alt="" />
                 </div>
-                <div className=' text-center text-2xl font-semibold mb-10'>IMC Business Solution</div>
+                <div className=' text-center text-2xl font-semibold mb-5'>IMC Business Solution</div>
                 <div className=' flex justify-center items-center gap-10 mb-5 bg-white p-5 rounded-full BoxShadow'>
                     <div className=' text-xl'><MdOutlineFacebook/></div>
                     <div className=' text-xl'><BiLogoInstagramAlt/></div>
@@ -109,7 +118,7 @@ const Navbar = () => {
                     <div className=' text-xl'><FaYoutube/></div>
                 </div>
                 <div className=' flex justify-center text-center items-center'>
-                <ul className='flex flex-col gap-10 font-semibold'>
+                <ul className='flex flex-col gap-5 font-semibold'>
                     <li>
                         <Link to="/" className=' flex justify-center items-center gap-5'>
                             <div className=' text-[#ff9100]'><FaHome /></div>
@@ -169,6 +178,36 @@ const Navbar = () => {
                             <div className=' text-[#ff9100]'><PiVideoFill /></div>
                             <div>Video</div>
                         </Link>
+                    </li>
+                    <li>
+                        <div className='flex flex-col'>
+                            <div className='flex justify-center items-center gap-5 cursor-pointer' onClick={toggleDropdown2}>
+                            <div className='text-[#ff9100]'><GrMultimedia /></div>
+                            <div>Social Media</div>
+                            </div>
+                            {socialOpen && (
+                            <motion.ul
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className='pl-14 mt-2'
+                            >
+                                <li className='mt-2'>
+                                    <Link to="/instagram" className='flex justify-start items-center gap-5'>
+                                        <div className='text-[#ff9100]'><BsInstagram /></div>
+                                        <div>Instagram</div>
+                                    </Link>
+                                </li>
+                                <li className='mt-3'>
+                                    <Link to="/facebook" className='flex justify-start items-center gap-5'>
+                                        <div className='text-[#ff9100]'><BiLogoFacebook /></div>
+                                        <div>Facebook</div>
+                                    </Link>
+
+                                </li>
+                            </motion.ul>
+                            )}
+                        </div>
                     </li>
                 </ul>
             </div>
