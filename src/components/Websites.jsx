@@ -11,6 +11,7 @@ const Websites = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
   const [showImageView, setShowImageView] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [user, setUser] = useState(null);
 
   // Check if Admin is Logged In
@@ -46,14 +47,15 @@ const Websites = () => {
     }
   };
 
-  const handleView = (url) => {
-    setSelectedImage(url);
-    setShowImageView(true);
+  const handleView = (urls, index) => {
+    setSelectedImage(urls); // Set an array of URLs
+    setCurrentIndex(index); // Set the initial index
+    setShowImageView(true); // Show the ImageView
   };
 
   const handleCloseImageView = () => {
     setShowImageView(false);
-    setSelectedImage(null);
+    setSelectedImage([]);
   };
 
   return (
@@ -87,8 +89,12 @@ const Websites = () => {
             </div>
           ))}
           {showImageView && (
-            <ImageView url={selectedImage} onClose={handleCloseImageView} />
-          )}
+            <ImageView 
+              urls={selectedImage} // Array of image/video URLs
+              currentIndex={currentIndex} // Current index in the array
+              onClose={handleCloseImageView} 
+            />
+)}
         </div>
       </section>
     </div>
