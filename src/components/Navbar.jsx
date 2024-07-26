@@ -70,7 +70,7 @@ const Navbar = () => {
         }
     }
   return (
-    <div>
+    <div className=''>
         <header className=''>
            
            {menuBar &&  <NavbarMobile setMenuBar = {setMenuBar} /> }

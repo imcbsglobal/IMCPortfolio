@@ -49,6 +49,26 @@ body{
   @apply container mx-auto py-2 
 }
 
+.header-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width to cover the viewport */
+  height: 60px; /* Adjust height as needed */
+  /* background-color: #333; */
+  color: white;
+  z-index: 1000; /* Ensure it's above other elements */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Optional: If you have a lot of content */
+}
+
+@media (min-width: 768px) {
+  .header-fixed {
+    width: 400px; /* Adjust for larger screens if needed */
+  }
+}
+
 img {
   @apply w-full
 }
@@ -128,4 +148,20 @@ img {
 }
 .fontName{
   font-family: 'StateSecret', sans-serif;
+}
+.image-view-content {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  opacity: 0;
+  transform: scale(0.9);
+}
+
+.image-view-content.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.image-view-container {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
 }
