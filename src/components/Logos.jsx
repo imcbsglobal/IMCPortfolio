@@ -9,12 +9,13 @@ import { auth } from './Firebase';
 
 const Logos = () => {
   const [logos, setLogos] = useState([]);
-  const [selectedLogo, setSelectedLogo] = useState(null);
+  const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [user, setUser] = useState(null);
 
-
-  // Is Admin Logined or Not
+  // Check if admin is logged in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
@@ -22,8 +23,7 @@ const Logos = () => {
     return () => unsubscribe();
   }, []);
 
-
-
+  // Fetch logos and update state
   useEffect(() => {
     const dbRef = ref(db, 'logos');
     onValue(dbRef, (snapshot) => {
@@ -35,9 +35,11 @@ const Logos = () => {
         }
       }
       setLogos(fetchedLogos);
+      setImages(fetchedLogos); // Set images state
     });
   }, []);
 
+  // Handle delete action
   const handleDelete = async (key, url) => {
     try {
       await remove(ref(db, `logos/${key}`));
@@ -49,51 +51,65 @@ const Logos = () => {
     }
   };
 
-  const handleView = (url) => {
-    setSelectedLogo(url);
-    setShowImageView(true);
+  // Handle view action
+  const handleView = (index) => {
+    setSelectedImage(images.map(img => img.url)); // Set an array of URLs
+    setCurrentIndex(index); // Set the initial index
+    setShowImageView(true); // Show the ImageView
   };
 
+  // Close ImageView
   const handleCloseImageView = () => {
     setShowImageView(false);
-    setSelectedLogo(null);
+    setSelectedImage([]);
   };
 
   return (
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-        <section>
-            <div>
-                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5'>Our Logos</div>
-                <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow md:w-[400px] lg:w-[600px]'>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
-                </div>
-            </div>
+      <section>
+        <div>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5'>Our Logos</div>
+          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow md:w-[400px] lg:w-[600px]'>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
+          </div>
+        </div>
 
-            {user && (
-                <div>
-                  <UploadFile storagePath="Logos" dbPath="logos" />
+        {user && (
+          <div>
+            <UploadFile storagePath="Logos" dbPath="logos" />
+          </div>
+        )}
+
+        <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
+          {logos.map(({ key, url }, index) => (
+            <div key={key} className='h-[300px] w-full rounded-3xl boxShadow1 relative'>
+              <img 
+                src={url} 
+                alt="" 
+                onClick={() => handleView(index)} // Pass the index to handleView
+                className='w-full h-full object-contain rounded-3xl' 
+              />
+              {user && (
+                <div className='absolute flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
+                  <button 
+                    onClick={() => handleDelete(key, url)} 
+                    className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'
+                  >
+                    Delete
+                  </button>
                 </div>
-            )}
-            
-            <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
-                {logos.map(({ key, url }) => (
-                    <div key={key} className='h-[300px] w-full rounded-3xl boxShadow1 relative'>
-                        <img src={url} alt="" onClick={() => handleView(url)} className='w-full h-full object-contain rounded-3xl' />
-                        {user && (
-                            <div className='absolute flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
-                              <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
-                            </div>
-                        )}
-                        
-                    </div>
-                ))}
-                {showImageView && (
-                    <ImageView url={selectedLogo} onClose={handleCloseImageView} />
-                )}
+              )}
             </div>
-        </section>
-      
-      
+          ))}
+          {showImageView && (
+            <ImageView 
+              urls={selectedImage} // Pass the image URLs
+              currentIndex={currentIndex} // Current index in the array
+              onClose={handleCloseImageView} 
+            />
+          )}
+        </div>
+      </section>
     </div>
   );
 };

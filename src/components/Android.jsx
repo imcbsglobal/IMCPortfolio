@@ -9,8 +9,9 @@ import { auth } from './Firebase';
 
 const Android = () => {
   const [images, setImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -45,14 +46,15 @@ const Android = () => {
     }
   };
 
-  const handleView = (url) => {
-    setSelectedImage(url);
-    setShowImageView(true);
+  const handleView = (urls, index) => {
+    setSelectedImage(urls); // Set an array of URLs
+    setCurrentIndex(index); // Set the initial index
+    setShowImageView(true); // Show the ImageView
   };
 
   const handleCloseImageView = () => {
     setShowImageView(false);
-    setSelectedImage(null);
+    setSelectedImage([]);
   };
 
   return (
@@ -88,7 +90,11 @@ const Android = () => {
                     </div>
                 ))}
                 {showImageView && (
-                    <ImageView url={selectedImage} onClose={handleCloseImageView} />
+                    <ImageView 
+                    urls={images.map(img => img.url)} // Pass all image URLs
+                    currentIndex={currentIndex} // Current index in the array
+                    onClose={handleCloseImageView} 
+                />
                 )}
             </div>
         </section>

@@ -9,20 +9,18 @@ import { auth } from './Firebase';
 
 const Posters = () => {
   const [posters, setPosters] = useState([]);
-  const [selectedPoster, setSelectedPoster] = useState(null);
+  const [images, setImages] = useState([]);
+  const [selectedImage, setSelectedImage] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [user, setUser] = useState(null);
 
-
-  // Is Admin Logined or Not
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
     });
     return () => unsubscribe();
   }, []);
-
-
 
   useEffect(() => {
     const dbRef = ref(db, 'posters');
@@ -35,6 +33,8 @@ const Posters = () => {
         }
       }
       setPosters(fetchedPosters);
+      // Populate images state with fetched posters
+      setImages(fetchedPosters);
     });
   }, []);
 
@@ -49,52 +49,63 @@ const Posters = () => {
     }
   };
 
-  const handleView = (url) => {
-    setSelectedPoster(url);
-    setShowImageView(true);
+  const handleView = (index) => {
+    setSelectedImage(images.map(img => img.url)); // Set an array of URLs
+    setCurrentIndex(index); // Set the initial index
+    setShowImageView(true); // Show the ImageView
   };
 
   const handleCloseImageView = () => {
     setShowImageView(false);
-    setSelectedPoster(null);
+    setSelectedImage([]);
   };
 
   return (
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-        <section>
-            <div>
-                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5'>Our Posters</div>
-                <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow md:w-[400px] lg:w-[600px]'>
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
-                </div>
-            </div>
-            
-            {user && (
-                <div>
-                  <UploadFile storagePath="Posters" dbPath="posters" />
-                </div>
-            )}
-            
+      <section>
+        <div>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5'>Our Posters</div>
+          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow md:w-[400px] lg:w-[600px]'>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
+          </div>
+        </div>
 
-            <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
-                {posters.map(({ key, url }) => (
-                <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
-                    <img src={url} alt="" onClick={() => handleView(url)} className='w-full h-full object-cover rounded-3xl'/>
-                    {user && (
-                      <div className='absolute flex justify-center items-center mx-auto bottom-5 left-10 md:left-[30%] Delete-View-Btn'>
-                        <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
-                      </div>
-                    )}
-                    
+        {user && (
+          <div>
+            <UploadFile storagePath="Posters" dbPath="posters" />
+          </div>
+        )}
+
+        <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
+          {posters.map(({ key, url }, index) => (
+            <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
+              <img 
+                src={url} 
+                alt="" 
+                onClick={() => handleView(index)} 
+                className='w-full h-full object-cover rounded-3xl'
+              />
+              {user && (
+                <div className='absolute flex justify-center items-center mx-auto bottom-5 left-10 md:left-[30%] Delete-View-Btn'>
+                  <button 
+                    onClick={() => handleDelete(key, url)} 
+                    className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'
+                  >
+                    Delete
+                  </button>
                 </div>
-                ))}
-                {showImageView && (
-                    <ImageView url={selectedPoster} onClose={handleCloseImageView} />
-                )}
+              )}
             </div>
-        </section>
-      
-      
+          ))}
+          {showImageView && (
+            <ImageView 
+              urls={selectedImage} // Pass the image URLs
+              currentIndex={currentIndex} // Current index in the array
+              onClose={handleCloseImageView} 
+            />
+          )}
+        </div>
+      </section>
     </div>
   );
 };

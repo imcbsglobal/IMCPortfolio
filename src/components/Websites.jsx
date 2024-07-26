@@ -9,7 +9,7 @@ import { auth } from './Firebase';
 
 const Websites = () => {
   const [images, setImages] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [user, setUser] = useState(null);
@@ -58,6 +58,7 @@ const Websites = () => {
     setSelectedImage([]);
   };
 
+
   return (
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section>
@@ -90,10 +91,10 @@ const Websites = () => {
           ))}
           {showImageView && (
             <ImageView 
-              urls={selectedImage} // Array of image/video URLs
+              urls={images.map(img => img.url)} // Pass all image URLs
               currentIndex={currentIndex} // Current index in the array
               onClose={handleCloseImageView} 
-            />
+          />
 )}
         </div>
       </section>
