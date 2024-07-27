@@ -30,6 +30,7 @@ const UploadPdf = ({ storagePath, dbPath }) => {
   const handleInputFile = (e) => {
     const fileData = e.target.files[0];
     if (fileData && fileData.type === 'application/pdf') {
+      console.log("file data",fileData);
       setFile(fileData);
       setFileName(fileData.name);
       setIsError(false); // Reset error state if file is valid
@@ -61,8 +62,8 @@ const UploadPdf = ({ storagePath, dbPath }) => {
           setPdfUrl(url);
           console.log("Upload complete, URL:", url);
           const newFileRef = push(dbRef(db, dbPath));
-          await set(newFileRef, { url });
-          await set(dbRef(db, `${dbPath}/latest`), { url });
+          await set(newFileRef, { name : fileName,url });
+          await set(dbRef(db, `${dbPath}/latest`), {name : fileName, url });
           setIsLoading(false);
           setShowSuccess(true);
           setTimeout(() => {

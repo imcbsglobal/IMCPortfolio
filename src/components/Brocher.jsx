@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Worker, Viewer } from '@react-pdf-viewer/core';
+// import { Worker, Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { db, storage, auth } from "./Firebase";
 import { ref, onValue, remove } from "firebase/database";
 import { ref as storageRef, deleteObject } from "firebase/storage";
 import UploadPdf from './UploadPdf';
 import { onAuthStateChanged } from 'firebase/auth';
+import PDF from "../assets/pdf.png"
 
 const Brochure = () => {
   const [pdfs, setPdfs] = useState([]);
@@ -31,9 +32,9 @@ const Brochure = () => {
           console.log(`Processing key: ${key}`, data[key]); // Debugging line
 
           // Exclude 'latest' key and ensure URL is a valid PDF
-          if (key !== 'latest' && data[key] && data[key].url && data[key].url.toLowerCase().endsWith('.pdf')) {
+          if (key !== 'latest' && data[key] && data[key].url) {
             console.log(`Adding PDF with key: ${key} and URL: ${data[key].url}`); // Debugging line
-            fetchedPdfs.push({ key, url: data[key].url });
+            fetchedPdfs.push({ key, url: data[key].url,name : data[key].name });
           }
         }
         console.log("Processed PDFs:", fetchedPdfs); // Debugging line
@@ -53,6 +54,10 @@ const Brochure = () => {
     }
   };
 
+  const ClickTheUrl =(url) => {
+      window.location.href = url
+  }
+
   return (
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section>
@@ -70,17 +75,20 @@ const Brochure = () => {
         )}
 
         {pdfs.length > 0 ? (
-          <div>
-            {pdfs.map(({ key, url }) => (
-              <div key={key} className='h-[750px] w-full rounded-3xl boxShadow relative mt-10'>
-                <div style={{ border: '1px solid rgba(0, 0, 0, 0.3)', height: '750px' }}>
-                  <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-                    <Viewer fileUrl={url} />
-                  </Worker>
+          <div className=' grid place-items-center grid-cols-1 lg:grid-cols-3'>
+            {pdfs.map(({ key, url, name }) => (
+              <div key={key} className='h-[300px] w-[300px] rounded-3xl boxShadow relative mt-10'>
+                <div className=' w-auto h-[120px] mb-3 mt-3'>
+                  <img src={PDF} className=' w-full h-full object-contain drop-shadow-md' alt="" />
                 </div>
+                <div className=' flex flex-col gap-5 justify-center items-center'>
+                  <div className=' text-[16px] font-semibold'>{name}</div>
+                  <button className=' px-8 py-1 font-bold bg-white rounded-3xl mb-5 shadow-lg' onClick={()=> window.open(url, "_blank")}>Click Here</button>
+                </div>
+                  
                 {user && (
-                  <div className='absolute flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
-                    <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
+                  <div className='flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
+                    <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl border px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
                   </div>
                 )}
               </div>
