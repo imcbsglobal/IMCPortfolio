@@ -6,12 +6,14 @@ import UploadFile from './UploadFile';
 import ImageView from './ImageView';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './Firebase';
+import Loader from './Loader';
 
 const Facebook = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [loading, setLoading] = useState(true)
   const [user, setUser] = useState(null);
 
 
@@ -34,6 +36,7 @@ const Facebook = () => {
         }
       }
       setImages(fetchedImages);
+      setLoading(false)
     });
   }, []);
 
@@ -75,7 +78,10 @@ const Facebook = () => {
           </div>
         )}
 
-        <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
+        {loading ? (
+          <Loader/>
+        ) : (
+          <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
           {images.map(({ key, url, playStoreLink }, index) => (
             <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
               <img src={url} alt="" onClick={() => handleView(images, index)} className='w-full h-full object-cover rounded-3xl'/>
@@ -96,6 +102,8 @@ const Facebook = () => {
             />
           )}
         </div>
+        )}
+       
       </section>
     </div>
   )

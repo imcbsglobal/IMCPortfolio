@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
-// import { Worker, Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { db, storage, auth } from "./Firebase";
 import { ref, onValue, remove } from "firebase/database";
 import { ref as storageRef, deleteObject } from "firebase/storage";
 import UploadPdf from './UploadPdf';
 import { onAuthStateChanged } from 'firebase/auth';
-import PDF from "../assets/pdf.png"
+import PDF from "../assets/pdf.png";
+import Loader from './Loader';
 
 const Brochure = () => {
   const [pdfs, setPdfs] = useState([]);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -34,11 +35,12 @@ const Brochure = () => {
           // Exclude 'latest' key and ensure URL is a valid PDF
           if (key !== 'latest' && data[key] && data[key].url) {
             console.log(`Adding PDF with key: ${key} and URL: ${data[key].url}`); // Debugging line
-            fetchedPdfs.push({ key, url: data[key].url,name : data[key].name });
+            fetchedPdfs.push({ key, url: data[key].url, name: data[key].name });
           }
         }
         console.log("Processed PDFs:", fetchedPdfs); // Debugging line
         setPdfs(fetchedPdfs);
+        setLoading(false); // Set loading to false once data is fetched
       }
     });
   }, []);
@@ -53,10 +55,6 @@ const Brochure = () => {
       console.error("Error deleting PDF:", error);
     }
   };
-
-  const ClickTheUrl =(url) => {
-      window.location.href = url
-  }
 
   return (
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
@@ -74,30 +72,34 @@ const Brochure = () => {
           </div>
         )}
 
-        {pdfs.length > 0 ? (
-          <div className=' grid place-items-center grid-cols-1 lg:grid-cols-3'>
-            {pdfs.map(({ key, url, name }) => (
-              <div key={key} className='h-[300px] w-[300px] rounded-3xl boxShadow relative mt-10'>
-                <div className=' w-auto h-[120px] mb-3 mt-3'>
-                  <img src={PDF} className=' w-full h-full object-contain drop-shadow-md' alt="" />
-                </div>
-                <div className=' flex flex-col gap-5 justify-center items-center'>
-                  <div className=' text-[16px] font-semibold'>{name}</div>
-                  <button className=' px-8 py-1 font-bold bg-white rounded-3xl mb-5 shadow-lg' onClick={()=> window.open(url, "_blank")}>Click Here</button>
-                </div>
-                  
-                {user && (
-                  <div className='flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
-                    <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl border px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+        {loading ? (
+          <Loader />
         ) : (
-          <div className='text-center mt-10'>
-            <span className='text-sm md:text-xl font-semibold fontName text-[#343434]'>No brochures available.</span>
-          </div>
+          pdfs.length > 0 ? (
+            <div className='grid place-items-center grid-cols-1 lg:grid-cols-3'>
+              {pdfs.map(({ key, url, name }) => (
+                <div key={key} className='h-[300px] w-[300px] rounded-3xl boxShadow relative mt-10'>
+                  <div className='w-auto h-[120px] mb-3 mt-3'>
+                    <img src={PDF} className='w-full h-full object-contain drop-shadow-md' alt="" />
+                  </div>
+                  <div className='flex flex-col gap-5 justify-center items-center'>
+                    <div className='text-[16px] font-semibold'>{name}</div>
+                    <button className='px-8 py-1 font-bold bg-white rounded-3xl mb-5 shadow-lg' onClick={() => window.open(url, "_blank")}>Click Here</button>
+                  </div>
+
+                  {user && (
+                    <div className='flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
+                      <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl border px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className='text-center mt-10'>
+              <span className='text-sm md:text-xl font-semibold fontName text-[#343434]'>No brochures available.</span>
+            </div>
+          )
         )}
       </section>
     </div>

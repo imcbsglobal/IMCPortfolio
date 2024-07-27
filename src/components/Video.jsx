@@ -3,10 +3,12 @@ import { db, auth } from "./Firebase";
 import { ref as dbRef, onValue, remove } from "firebase/database";
 import { onAuthStateChanged } from 'firebase/auth';
 import UploadVideo from './UploadVideo';
+import Loader from './Loader';
 
 const Video = () => {
   const [videos, setVideos] = useState([]);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true)
 
   // Check if Admin is Logged In
   useEffect(() => {
@@ -23,6 +25,7 @@ const Video = () => {
       if (data) {
         const videosArray = Object.entries(data).map(([id, details]) => ({ id, ...details }));
         setVideos(videosArray);
+        setLoading(false)
       }
     });
   }, []);
@@ -54,7 +57,10 @@ const Video = () => {
           </div>
         )}
 
-        <div className='mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 place-items-center lg:place-items-start'>
+        {loading ? (
+          <Loader/>
+        ) : (
+          <div className='mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 place-items-center lg:place-items-start'>
           {videos.map((video) => (
             video.url && (
               <div key={video.id} className='relative md:w-[400px] h-[300px] w-[300px]'>
@@ -83,6 +89,8 @@ const Video = () => {
             )
           ))}
         </div>
+        )}
+        
       </section>
     </div>
   );
