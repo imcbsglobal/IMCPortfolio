@@ -78,7 +78,7 @@ const UploadFile = ({ storagePath, dbPath }) => {
       <div className='flex justify-center items-center gap-10 mt-10'>
         <input type="file" accept='image/*,video/*,application/pdf' ref={inRef} className='hidden' onChange={handleInputFile} />
         {user && (
-          <div className=' grid place-items-center lg:grid-cols-2'>
+          <div className=' grid place-items-center Mlg:grid-cols-2 gap-5'>
             <div className=''>
               <input type="text" placeholder='Enter The Url' value={playStoreLink} onChange={(e) => setPlayStoreLink(e.target.value)} className='py-2 px-8 outline-none rounded-xl shadow-lg bg-white border border-[#eaeaea]' />
             </div>

@@ -70,8 +70,8 @@ const Logos = () => {
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section>
         <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5'>Our Logos</div>
-          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow md:w-[400px] lg:w-[600px]'>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal'>Our Logos</div>
+          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]'>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
           </div>
         </div>
@@ -85,7 +85,7 @@ const Logos = () => {
         {loading ? (
           <Loader />
         ) : (
-          <div className='grid place-items-center md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10'>
+          <div className='grid place-items-center xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-10'>
             {logos.map(({ key, url }, index) => (
               <div key={key} className='h-[300px] w-full rounded-3xl boxShadow1 relative'>
                 <img 

@@ -45,8 +45,8 @@ const Video = () => {
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section>
         <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5'>Our Videos</div>
-          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow md:w-[400px] lg:w-[600px]'>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal'>Our Videos</div>
+          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]'>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
           </div>
         </div>
@@ -60,10 +60,10 @@ const Video = () => {
         {loading ? (
           <Loader/>
         ) : (
-          <div className='mt-10 grid grid-cols-1 md:grid-cols-2 gap-5 place-items-center lg:place-items-start'>
+          <div className='mt-10 grid grid-cols-1 xlg:grid-cols-2 gap-5 place-items-center lg:place-items-start'>
           {videos.map((video) => (
             video.url && (
-              <div key={video.id} className='relative md:w-[400px] h-[300px] w-[300px]'>
+              <div key={video.id} className='relative xlg:w-full Mlg:w-[400px] h-[300px] w-[300px]'>
                 <iframe 
                   width="300" 
                   height="300" 
@@ -72,7 +72,7 @@ const Video = () => {
                   frameBorder="0" 
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                   referrerPolicy="strict-origin-when-cross-origin" 
-                  className='rounded-3xl border-[1px] border-white boxShadow1 w-[300px] md:w-[400px]' 
+                  className='rounded-3xl border-[1px] border-white boxShadow1 w-[300px] xlg:w-full Mlg:w-[400px]' 
                   allowFullScreen
                 ></iframe>
                 {user && (

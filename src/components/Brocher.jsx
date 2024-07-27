@@ -60,8 +60,8 @@ const Brochure = () => {
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section>
         <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5'>Our Brochure</div>
-          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow md:w-[400px] lg:w-[600px]'>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal'>Our Brochure</div>
+          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]'>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
           </div>
         </div>
@@ -76,9 +76,9 @@ const Brochure = () => {
           <Loader />
         ) : (
           pdfs.length > 0 ? (
-            <div className='grid place-items-center grid-cols-1 lg:grid-cols-3'>
+            <div className='grid place-items-center grid-cols-1 xlg:grid-cols-2 Mlg:grid-cols-3'>
               {pdfs.map(({ key, url, name }) => (
-                <div key={key} className='h-[300px] w-[300px] rounded-3xl boxShadow relative mt-10'>
+                <div key={key} className='h-[300px] w-[300px] xlg:w-full Mlg:w-[300px] rounded-3xl boxShadow relative mt-10'>
                   <div className='w-auto h-[120px] mb-3 mt-3'>
                     <img src={PDF} className='w-full h-full object-contain drop-shadow-md' alt="" />
                   </div>
