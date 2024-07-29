@@ -3,15 +3,15 @@ import { getAuth } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 import { getDatabase } from "firebase/database";
 
-// Your web app's Firebase configuration
+// Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAvMg73ra9PLrVYfV2NWq90vakXPfnvtDg",
-  authDomain: "imc-login-907a6.firebaseapp.com",
-  projectId: "imc-login-907a6",
-  storageBucket: "imc-login-907a6.appspot.com",
-  messagingSenderId: "485790959574",
-  appId: "1:485790959574:web:8941dc61157eded2a40677",
-  databaseURL: "https://imc-login-907a6-default-rtdb.asia-southeast1.firebasedatabase.app"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  databaseURL: import.meta.env.VITE_FIREBASE_DATABASE_URL
 };
 
 // Initialize Firebase
