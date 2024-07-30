@@ -194,9 +194,9 @@ img {
   border: .1px solid rgb(255, 255, 255);
 }
 .GlassBg2{
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.73), rgba(255, 255, 255, 0.707));
+  /* background: linear-gradient(135deg, rgba(255, 255, 255, 0.73), rgba(255, 255, 255, 0.707)); */
   backdrop-filter: blur(10px);
-  -webkit-box-shadow: inset 2px -15px 35px -7px rgba(0,0,0,0.7);
-  -moz-box-shadow: inset 2px -15px 35px -7px rgba(0,0,0,0.7);
-  box-shadow: inset 2px -15px 35px -7px rgba(0,0,0,0.7);
+  /* -webkit-box-shadow: 7px 14px 20px -12px rgba(0,0,0,0.89);
+-moz-box-shadow: 7px 14px 20px -12px rgba(0,0,0,0.89);
+box-shadow: 7px 14px 20px -12px rgba(0,0,0,0.89); */
 }

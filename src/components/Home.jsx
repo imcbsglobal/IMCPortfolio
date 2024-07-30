@@ -14,7 +14,7 @@ const Home = () => {
               <div className=' mb-10'>
                 <div className="FontStyle-Top text-3xl md:text-[42px] text-[#363636] mb-5 leading-normal">Transforming Ideas into Impactful <span className=' text-[#f80]'>Designs</span>
                 </div>
-                <div className=' text-sm mb-5 GlassBg2 p-5 rounded-3xl border-[#fff]'>a versatile management platform designed to provide comprehensive software solutions, including business software, Android/iOS development, web development, hardware and IT support, and business execution support. Our primary goal is to elevate the diverse products of RITS Software to the global market.</div>
+                <div className=' text-sm mb-5 GlassBg2 rounded-3xl'>A versatile management platform designed to provide comprehensive software solutions, including business software, Android/iOS development, web development, hardware and IT support, and business execution support. Our primary goal is to elevate the diverse products of RITS Software to the global market.</div>
                 <div>
                   <button className=' px-8 py-2 rounded-3xl shadow-lg text-[#f80] font-bold border'>Get Started</button>
                 </div>

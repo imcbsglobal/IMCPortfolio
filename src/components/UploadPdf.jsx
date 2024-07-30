@@ -7,13 +7,16 @@ import { onAuthStateChanged } from 'firebase/auth';
 
 const UploadPdf = ({ storagePath, dbPath }) => {
   const [pdfUrl, setPdfUrl] = useState('');
+  const [thumbnailUrl, setThumbnailUrl] = useState('');
   const [fileName, setFileName] = useState('');
   const [isError, setIsError] = useState(false);
   const [file, setFile] = useState(null);
+  const [thumbnail, setThumbnail] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [percentage, setPercentage] = useState(0);
   const [showSuccess, setShowSuccess] = useState(false);
   const inRef = useRef();
+  const thumbnailRef = useRef();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -27,48 +30,85 @@ const UploadPdf = ({ storagePath, dbPath }) => {
     inRef.current.click();
   };
 
+  const selectThumbnail = () => {
+    thumbnailRef.current.click();
+  };
+
   const handleInputFile = (e) => {
     const fileData = e.target.files[0];
     if (fileData && fileData.type === 'application/pdf') {
-      console.log("file data",fileData);
       setFile(fileData);
       setFileName(fileData.name);
-      setIsError(false); // Reset error state if file is valid
+      setIsError(false);
+    } else {
+      setIsError(true);
+    }
+  };
+
+  const handleInputThumbnail = (e) => {
+    const fileData = e.target.files[0];
+    if (fileData && fileData.type.startsWith('image/')) {
+      setThumbnail(fileData);
+      setIsError(false);
     } else {
       setIsError(true);
     }
   };
 
   const handleFileUpload = () => {
-    if (!file) return;
+    if (!file || !thumbnail) return;
     setIsLoading(true);
-    setIsError(false); // Reset error state before uploading
-    const storageRef = ref(storage, `${storagePath}/${fileName}`);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    setIsError(false);
 
-    uploadTask.on('state_changed', 
+    const storageRef = ref(storage, `${storagePath}/${fileName}`);
+    const thumbnailRef = ref(storage, `${storagePath}/thumbnails/${fileName}`);
+
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    const uploadThumbnailTask = uploadBytesResumable(thumbnailRef, thumbnail);
+
+    uploadTask.on('state_changed',
       (snapshot) => {
         const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setPercentage(Math.round(progress));
-      }, 
+      },
       (error) => {
         console.error("Upload error:", error);
         setIsError(true);
         setIsLoading(false);
-      }, 
+      },
       async () => {
         try {
-          const url = await getDownloadURL(uploadTask.snapshot.ref);
-          setPdfUrl(url);
-          console.log("Upload complete, URL:", url);
-          const newFileRef = push(dbRef(db, dbPath));
-          await set(newFileRef, { name : fileName,url });
-          await set(dbRef(db, `${dbPath}/latest`), {name : fileName, url });
-          setIsLoading(false);
-          setShowSuccess(true);
-          setTimeout(() => {
-            setShowSuccess(false);
-          }, 5000);
+          const pdfUrl = await getDownloadURL(uploadTask.snapshot.ref);
+          setPdfUrl(pdfUrl);
+          uploadThumbnailTask.on('state_changed',
+            (snapshot) => {
+              const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              setPercentage(Math.round(progress));
+            },
+            (error) => {
+              console.error("Thumbnail upload error:", error);
+              setIsError(true);
+              setIsLoading(false);
+            },
+            async () => {
+              try {
+                const thumbnailUrl = await getDownloadURL(uploadThumbnailTask.snapshot.ref);
+                setThumbnailUrl(thumbnailUrl);
+                const newFileRef = push(dbRef(db, dbPath));
+                await set(newFileRef, { name: fileName, pdfUrl, thumbnailUrl });
+                await set(dbRef(db, `${dbPath}/latest`), { name: fileName, pdfUrl, thumbnailUrl });
+                setIsLoading(false);
+                setShowSuccess(true);
+                setTimeout(() => {
+                  setShowSuccess(false);
+                }, 5000);
+              } catch (error) {
+                console.error("Error getting download URL or updating database:", error);
+                setIsError(true);
+                setIsLoading(false);
+              }
+            }
+          );
         } catch (error) {
           console.error("Error getting download URL or updating database:", error);
           setIsError(true);
@@ -88,18 +128,31 @@ const UploadPdf = ({ storagePath, dbPath }) => {
           className='hidden' 
           onChange={handleInputFile} 
         />
+        <input 
+          type="file" 
+          accept='image/*' 
+          ref={thumbnailRef} 
+          className='hidden' 
+          onChange={handleInputThumbnail} 
+        />
         {user && (
           <div className='flex justify-center items-center gap-10 mt-10'>
             <button 
               className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]' 
               onClick={selectFile}
             >
-              Select<span className='text-[#ff9019]'><FaSquarePlus /></span>
+              Select PDF<span className='text-[#ff9019]'><FaSquarePlus /></span>
+            </button>
+            <button 
+              className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]' 
+              onClick={selectThumbnail}
+            >
+              Select Thumbnail<span className='text-[#ff9019]'><FaSquarePlus /></span>
             </button>
             <button 
               onClick={handleFileUpload} 
               className='flex items-center gap-2 md:text-xl text-sm bg-white px-8 py-2 rounded-xl shadow-lg font-bold text-[#343434] border border-[#eaeaea]'
-              disabled={!file || isLoading}
+              disabled={!file || !thumbnail || isLoading}
             >
               Upload <span className='text-[#ff9019]'><FaSquarePlus /></span>
             </button>
