@@ -90,26 +90,28 @@ const Navbar = () => {
                         </div>
                         <div className='text-center text-2xl font-semibold mb-5'>IMC Business Solution</div>
                         <div className='flex justify-center items-center gap-10 mb-5 bg-white p-5 rounded-full BoxShadow'>
-                            <div className='text-xl'><MdOutlineFacebook /></div>
-                            <div className='text-xl'><BiLogoInstagramAlt /></div>
-                            <div className='text-xl'><IoLogoWhatsapp /></div>
-                            <div className='text-xl'><FaYoutube /></div>
+                            <a href="https://facebook.com/">
+                            <div className='text-xl SocialHover'><MdOutlineFacebook /></div>
+                            </a>
+                            <div className='text-xl SocialHover'><BiLogoInstagramAlt /></div>
+                            <div className='text-xl SocialHover'><IoLogoWhatsapp /></div>
+                            <div className='text-xl SocialHover'><FaYoutube /></div>
                         </div>
                         <div className='flex justify-center text-center items-center'>
                             <ul className='flex flex-col gap-5 font-semibold'>
-                                <li>
+                                <li className='NavbarHover'>
                                     <NavLink to="/" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                         <div><FaHome /></div>
                                         <div>Home</div>
                                     </NavLink>
                                 </li>
-                                <li>
+                                <li className='NavbarHover'>
                                     <NavLink to="/websites" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                         <div><FaEarthAmericas /></div>
                                         <div>Websites</div>
                                     </NavLink>
                                 </li>
-                                <li>
+                                <li className='NavbarHover'>
                                     <div className='flex flex-col'>
                                         <div className='flex justify-center items-center gap-5 cursor-pointer' onClick={toggleDropdown}>
                                             <div><RiPencilRulerFill /></div>
@@ -122,19 +124,19 @@ const Navbar = () => {
                                                 exit={{ opacity: 0, height: 0 }}
                                                 className='pl-14 mt-2'
                                             >
-                                                <li className='mt-2'>
+                                                <li className='mt-2 insideNavbarHover'>
                                                     <NavLink to="/posters" className={({ isActive }) => `flex justify-start items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                                         <div><HiPencilAlt /></div>
                                                         <div>Posters</div>
                                                     </NavLink>
                                                 </li>
-                                                <li className='mt-3'>
+                                                <li className='mt-3 insideNavbarHover'>
                                                     <NavLink to="/brochure" className={({ isActive }) => `flex justify-start items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                                         <div><PiBookOpenTextFill /></div>
                                                         <div>Brochure</div>
                                                     </NavLink>
                                                 </li>
-                                                <li className='mt-3'>
+                                                <li className='mt-3 insideNavbarHover'>
                                                     <NavLink to="/logos" className={({ isActive }) => `flex justify-start items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                                         <div><PiPencilCircleBold /></div>
                                                         <div>Logos</div>
@@ -144,19 +146,19 @@ const Navbar = () => {
                                         )}
                                     </div>
                                 </li>
-                                <li>
+                                <li className='NavbarHover'>
                                     <NavLink to="/android" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                         <div><BsAndroid2 /></div>
                                         <div>App</div>
                                     </NavLink>
                                 </li>
-                                <li>
+                                <li className='NavbarHover'>
                                     <NavLink to="/video" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                         <div><PiVideoFill /></div>
                                         <div>Video</div>
                                     </NavLink>
                                 </li>
-                                <li>
+                                <li className='NavbarHover'>
                                     <div className='flex flex-col'>
                                         <div className='flex justify-center items-center gap-5 cursor-pointer' onClick={toggleDropdown2}>
                                             <div><GrMultimedia /></div>
@@ -169,13 +171,13 @@ const Navbar = () => {
                                                 exit={{ opacity: 0, height: 0 }}
                                                 className='pl-14 mt-2'
                                             >
-                                                <li className='mt-2'>
+                                                <li className='mt-2 insideNavbarHover'>
                                                     <NavLink to="/instagram" className={({ isActive }) => `flex justify-start items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                                         <div><BsInstagram /></div>
                                                         <div>Instagram</div>
                                                     </NavLink>
                                                 </li>
-                                                <li className='mt-3'>
+                                                <li className='mt-3 insideNavbarHover'>
                                                     <NavLink to="/facebook" className={({ isActive }) => `flex justify-start items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                                         <div><BiLogoFacebook /></div>
                                                         <div>Facebook</div>
