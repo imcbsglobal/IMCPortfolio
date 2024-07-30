@@ -52,8 +52,8 @@ const Navbar = () => {
     }
 
     return (
-        <div className=''>
-            <header className=''>
+        <div className=' m-0 p-0 box-border'>
+            <header className=' m-0 p-0'>
                 {menuBar && <NavbarMobile setMenuBar={setMenuBar} />}
                 <div className='GlassBg'>
                     <nav className='flex items-center justify-between px-8 mt-5 md:hidden'>
@@ -72,7 +72,7 @@ const Navbar = () => {
                         </div>
                     </nav>
                 </div>
-                <div className='md:fixed md:left-0 md:top-0 md:h-[100vh] md:w-[300px] md:mx-auto md:flex md:justify-center md:items-center lg:w-[400px] GlassBg hidden border-[.1px] border-[#fff] fixed'>
+                <div className='md:fixed md:left-0 md:top-0 md:w-[300px] md:mx-auto md:flex md:justify-center md:items-center lg:w-[400px] GlassBg hidden border-[.1px] border-[#fff] fixed py-20'>
                     <nav className='hidden md:block'>
                         {user ? (
                             <div className='absolute top-6 right-5'>

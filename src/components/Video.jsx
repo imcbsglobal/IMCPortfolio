@@ -43,7 +43,7 @@ const Video = () => {
 
   return (
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-      <section>
+      <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
         <div>
           <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal'>Our Videos</div>
           <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]'>
@@ -60,7 +60,7 @@ const Video = () => {
         {loading ? (
           <Loader/>
         ) : (
-          <div className='mt-10 grid grid-cols-1 xlg:grid-cols-2 gap-5 place-items-center lg:place-items-start'>
+          <div className='mt-10 grid grid-cols-1 xlg:grid-cols-2 gap-5 place-items-center lg:place-items-start Mlg:gap-5'>
           {videos.map((video) => (
             video.url && (
               <div key={video.id} className='relative xlg:w-full Mlg:w-[400px] h-[300px] w-[300px]'>
