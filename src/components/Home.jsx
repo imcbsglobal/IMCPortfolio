@@ -9,7 +9,7 @@ const Home = () => {
     <div className=' md:ml-[300px] lg:ml-[400px] mt-5 p-5 md:p-5'>
       <section className=' Mlg:max-w-[1200px] Mlg:mx-auto'>
           <div className=' h-[100vh] w-full'>
-            <div className=' w-full mb-0 md:mb-0 grid place-items-center gap-10 HomeBanner'>
+            <div className=' w-full mb-5 md:mb-0 grid place-items-center gap-10 HomeBanner'>
               {/* Left */}
               <div className=' mb-2'>
                 <div className="FontStyle-Top text-3xl md:text-[42px] text-[#363636] mb-5 leading-normal">Transforming <span className=' Mlg:block'>Ideas into</span> <span className='Mlg:block'>Impactful <span className=' text-[#f80]'>Designs</span></span>
@@ -20,14 +20,14 @@ const Home = () => {
                 </div>
               </div>
               {/* Right */}
-              <div className='w-auto h-[500px]'>
+              <div className='w-[320px] Responssive-Point xlg:w-auto max-h-[500px] h-full'>
                 <img src={homeBanner1} className=' drop-shadow-lg md:h-full md:w-full md:object-cover md:mt-[-40px]' alt="" />
               </div>
             </div>
 
             {/* Bottom Designs */}
            
-           <div className='grid grid-cols-1 md:grid-cols-2 place-items-start Mlg:place-content-start Mlg:place-items-start'>
+           <div className='grid grid-cols-1 md:grid-cols-2 place-items-center Mlg:place-content-start Mlg:place-items-start'>
               <div className=' h-[300px] w-auto flex justify-center xlg:justify-start items-center gap-2 mb-10'>
                 <div className=' h-[300px] w-[60%] border rounded-3xl shadow-2xl '>
                   <img src={Objectpng} className=' w-full h-full object-cover drop-shadow-2xl' alt="" />
