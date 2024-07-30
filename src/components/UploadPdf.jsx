@@ -136,7 +136,7 @@ const UploadPdf = ({ storagePath, dbPath }) => {
           onChange={handleInputThumbnail} 
         />
         {user && (
-          <div className='flex justify-center items-center gap-10 mt-10'>
+          <div className='grid grid-cols-2 place-items-center place-content-center Mlg:grid-cols-3 justify-center items-center gap-10 mt-10'>
             <button 
               className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]' 
               onClick={selectFile}

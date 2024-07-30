@@ -200,3 +200,8 @@ img {
 -moz-box-shadow: 7px 14px 20px -12px rgba(0,0,0,0.89);
 box-shadow: 7px 14px 20px -12px rgba(0,0,0,0.89); */
 }
+@media screen and (min-width: 1150px) {
+  .HomeBanner {
+    @apply grid-cols-2;
+  }
+}
