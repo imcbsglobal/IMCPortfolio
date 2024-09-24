@@ -63,30 +63,16 @@ const Home = () => {
           </div>
         </div>
       </div> */}
-      <div className=' w-[95%] rounded-3xl BgGradient GlassBg py-2 px-2 md:hidden Mlg:block'>
-        <div className='grid lg:grid-cols-3 justify-center items-start gap-5 lg:px-2 w-full'>
-          <div className='flex flex-col justify-center items-center py-2 bg-[#ffffff3d] rounded-3xl GlassBg w-full h-[200px]'>
-            <div className='w-[80px] h-[80px] rounded-full bg-[#fff] p-2 mb-2'>
-              <img src={logo} alt="" />
-            </div>
-            <div className='font-bold text-[#fff] mb-3'>IMC Business Solutions</div>
-            <div className=' text-xl flex justify-center items-center gap-5 bg-[#fff] py-2 px-8 rounded-[50px] GlassBg'>
-                <a href="https://www.facebook.com/profile.php?id=100069040622427">
-                  <BiLogoFacebook className=' text-[#ff7301] cursor-pointer SocialHover'/>
-                </a>
-                <a href="https://www.instagram.com/imcbusinesssolution/">
-                  <BiLogoInstagramAlt className=' text-[#ff7301] cursor-pointer SocialHover'/>
-                </a>
-                <a href="">
-                  <IoLogoWhatsapp className=' text-[#ff7301] cursor-pointer SocialHover'/>
-                </a>
-            </div>
+      <div className=' w-[95%] rounded-3xl   py-2  md:hidden Mlg:block'>
+        <div className='grid lg:flex justify-center items-center gap-5 w-full'>
+          <div className='flex  flex-col justify-center items-center py-2 bg-[#ffffff3d] rounded-3xl GlassBg w-full h-[200px] border-[#ff7f2a] border-[.1px]'>
+            <div className=' px-5 text-[#878282]'>We specialize in delivering tailored solutions to enhance your online presence. From innovative web development and eye-catching graphic designs to comprehensive digital marketing, SEO, and branding strategies, we help businesses stand out and succeed in the digital world.</div>
           </div>
           
 
-          <div className='grid grid-cols-1 place-items-center bg-[#ffffff3d] rounded-3xl GlassBg py-2 w-full h-[200px]'>
-            <div className='text-[#fff] font-bold text-xl lg:text-3xl underline underline-offset-8 mb-5'>Our Services</div>
-            <ul className='flex flex-col justify-center items-center list-disc text-[#fff] font-semibold'>
+          <div className='grid grid-cols-1 place-items-center lg:w-[50%] bg-[#ffffff3d] rounded-3xl GlassBg border-[#ff7f2a] border-[.1px] py-2 w-full h-[200px]'>
+            <div className='text-[#ff7f2a] drop-shadow-sm font-bold text-xl lg:text-3xl underline underline-offset-8 mb-5'>Our Services</div>
+            <ul className='flex flex-col justify-center items-start list-disc text-[#878282] font-semibold'>
               <li>Business Softwares</li>
               <li>Website and Web Applications</li>
               <li>Graphic Designing</li>
@@ -94,22 +80,7 @@ const Home = () => {
               <li>SEO and Branding</li>
             </ul>
           </div>
-          <div className='flex flex-col justify-center items-center mx-auto bg-[#ffffff3d] rounded-3xl GlassBg py-2 w-full h-[200px] px-2'>
-            <div className='text-center text-3xl font-bold text-[#fff] drop-shadow-sm underline underline-offset-8 mb-5'>Explore Our Portfolio</div>
-            
-            <div className='flex justify-center items-center w-full'>
-              <ul className='grid grid-cols-2 gap-x-10 text-[#fff] font-semibold leading-normal list-disc list-inside'>
-                  
-                  <Link to="/websites"><li className=''>Websites</li></Link>
-                  <Link to="/posters"><li className=' '>Posters</li></Link>
-                  <Link to="/brochure"><li className=' '>Brouchers</li></Link>
-                  <Link to="/logos"><li className=' '>Logos</li></Link>
-                  <Link to="/video"><li className=''>Video</li></Link>
-                  <Link to="/instagram"><li className=''>Instagram</li></Link>
-                  <Link to="/facebook"><li className=''>Facebook</li></Link>
-              </ul>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
