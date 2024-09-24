@@ -1,89 +1,118 @@
-import React from 'react'
-import homeBanner from "../assets/home-banner.jpg"
-import orange from "../assets/orange-shade.png"
-import homeBanner1 from "../assets/home-banner1.png"
-import Objectpng from "../assets/home-object1.png"
-import {motion} from "framer-motion"
+import React,{useEffect} from 'react'
+import blackShade from "../assets/black-shade.png"
+import Banner from "../assets/banner.jpg"
+import homeBanner from "../assets/home-banner1.png"
+import { Link } from "react-router-dom"
+import development from "../assets/development.jpg"
+import { Helmet } from 'react-helmet';
+import logo from "../assets/IMC Logo.png";
+import { BiLogoInstagramAlt, BiLogoFacebook } from "react-icons/bi";
+import { IoLogoWhatsapp } from "react-icons/io";
+
+
 
 const Home = () => {
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   return (
-    <div className=' md:ml-[300px] lg:ml-[400px] mt-5 p-5 md:p-5'>
-      <section className=' Mlg:max-w-[1200px] Mlg:mx-auto'>
-          <div className=' h-[100vh] w-full'>
-            <div className=' w-full mb-5 md:mb-0 grid place-items-center gap-10 HomeBanner'>
-              {/* Left */}
-              <div className=' mb-2'>
-                <div className="FontStyle-Top text-3xl md:text-[42px] text-[#363636] mb-5 leading-normal">Transforming <span className=' Mlg:block'>Ideas into</span> <span className='Mlg:block'>Impactful <span className=' text-[#f80]'>Designs</span></span>
-                </div>
-                <div className=' text-sm mb-5 GlassBg2 rounded-3xl'>A versatile management platform designed to provide comprehensive software solutions, including business software, Android/iOS development, web development, hardware and IT support, and business execution support. Our primary goal is to elevate the diverse products of RITS Software to the global market.</div>
-                <div>
-                  <button className=' px-8 py-2 rounded-3xl shadow-lg text-[#f80] font-bold border ButtonGradient'>Get Started</button>
-                </div>
-              </div>
-              {/* Right */}
-              <motion.div
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
-              className='w-[320px] Responssive-Point xlg:w-auto max-h-[500px] h-full'
-            >
-              <img src={homeBanner1} className=' drop-shadow-lg md:h-full md:w-full md:object-cover md:mt-[-40px]' alt="home-banner" />
-            </motion.div>
+    <div className='flex justify-center items-center'>
+
+      <Helmet>
+        <title>IMC Portfolio</title>
+        <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
+        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala" />
+      </Helmet>
+
+      <div className='relative pt-20 md:pt-0 md:ml-[300px] lg:ml-[400px] flex flex-col justify-center items-center'>
+      {/* <div className='absolute top-0 bottom-0 left-0 right-0 w-full h-full -z-50 opacity-5'>
+        <img src={Banner} className=' w-full h-full object-cover' alt="" />
+      </div> */}
+      {/* <div className='absolute top-0 bottom-0 left-0 right-0 w-full h-full -z-50'>
+        <img src={blackShade} className=' w-full h-full object-cover' alt="" />
+      </div> */}
+      <div className=' mt-5 px-5 grid place-items-center Mlg:flex  justify-center items-end gap-5 mb-5'>
+        <div className='mb-5 lg:w-[600px]'>
+          <div className='text-center text-[45px] leading-[50px] lg:text-[52px] lg:leading-[60px] font-bold mb-5 mx-auto text-[#ffad2a] drop-shadow-sm'>Turning Vision into Complete Solutions</div>
+          <div className='text-center mb-10 font-semibold text-[#878282] mx-auto'>We transform your ideas into seamless solutions, delivering services that streamline operations and drive success. Using the latest technologies and tailored strategies, we help your business stay ahead in a rapidly evolving digital world, providing solutions that empower your vision and achieve lasting results. </div>
+          <Link to="websites">
+            <div className='flex justify-center items-center'>
+              <button className='px-8 py-2 rounded-3xl ButtonGradient font-bold text-white'>Get Started</button>
             </div>
-
-            {/* Bottom Designs */}
-           
-           <div className='grid grid-cols-1 md:grid-cols-2 place-items-center Mlg:place-content-start Mlg:place-items-start'>
-              <div className=' h-[300px] w-auto flex justify-center xlg:justify-start items-center gap-2 mb-10'>
-                <motion.div
-                initial={{y:100,opacity:0}}
-                animate={{y:0,opacity:1}}
-                transition={{duration:1.5,delay:0.5,ease:'backInOut'}}
-                className=' h-[300px] w-[60%] border rounded-3xl shadow-2xl '>
-                  <img src={Objectpng} className=' w-full h-full object-cover drop-shadow-2xl' alt="" />
-                </motion.div>
-                <div className=' flex flex-col justify-center items-center gap-2'>
-                  <motion.div
-                  initial={{y:-100,opacity:0}}
-                  animate={{y:0,opacity:1}}
-                  transition={{duration:1.5,ease:'backInOut'}}
-                  className=' w-[100px] h-[145px] bg-black rounded-xl text-[#fff] p-5 text-center text-xl ObjectGradient2 font-bold'>
-                    What We Do?
-                  </motion.div>
-                  <motion.div
-                  initial={{x:-100,opacity:0}}
-                  animate={{x:0,opacity:1}}
-                  transition={{duration:1.5,ease:'backInOut'}}
-                  className=' w-[100px] h-[145px] bg-black rounded-xl overflow-hidden text-[#7e7e7e] text-[8px] text-center p-5 ObjectGradient3 md:p-3 md:text-[10px]'>
-                  a platform delivering comprehensive software solutions to elevate RITS Software globally.
-                  </motion.div>
-                </div>
-              </div>
-
-              <div className=' flex flex-col justify-start items-center'>
-                <motion.div
-                initial={{y:-100,opacity:0}}
-                animate={{y:0,opacity:1}}
-                transition={{duration:1.5,ease:'backInOut'}}
-                className=' h-[150px] p-5 mb-5 rounded-3xl w-full ObjectGradient4 overflow-hidden'>
-                  <div className='mb-1 md:mb-0'><button className=' px-8 py-2 font-bold bg-[#fff] cursor-none rounded-3xl shadow-lg text-sm'>About Us</button></div>
-                  <div className=' text-sm'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas tenetur assumenda beatae necessitatibus ea saepe dolore magnam natus et doloribus!</div>
-                </motion.div>
-
-                <motion.div
-                initial={{y:100,opacity:0}}
-                animate={{y:0,opacity:1}}
-                transition={{duration:1.5,ease:'backInOut'}}
-                className=' h-[150px] p-5 mb-5 rounded-3xl w-full ObjectGradient4 overflow-hidden'>
-                  <div className='mb-1 md:mb-0'><button className=' px-8 py-2 font-bold bg-[#fff] cursor-none rounded-3xl shadow-lg text-sm'>About Us</button></div>
-                  <div className=' text-sm'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quas tenetur assumenda beatae necessitatibus ea saepe dolore magnam natus et doloribus!</div>
-                </motion.div>
-              </div>
-
-           </div>
-
+          </Link>
+        </div>
+          <div className='w-auto h-[450px]'>
+            <img src={homeBanner} className='w-full h-full object-contain' alt="" />
+        </div>
+      </div>
+      {/* Bottom Side */}
+      {/* <div className=' flex justify-center items-center md:pl-10'>
+        <div className=' w-full grid place-items-center  md:flex justify-start items-center gap-10'>
+          <div className='w-[60%] h-[300px] rounded-3xl'>
+            <img src={development} className='w-full h-full object-cover rounded-3xl' alt="" />
           </div>
-      </section>
+          <div>
+            <div className='font-bold text-3xl mb-5 text-[#ffad2a] drop-shadow-sm'>Our Services</div>
+            <ul className='list-disc font-semibold'>
+             <li>Business Softwares</li>
+             <li>Website and Web Development</li>
+             <li>Graphic Designing</li>
+             <li>Digital Marketing</li>
+             <li>SEO and Branding</li>
+            </ul>
+          </div>
+        </div>
+      </div> */}
+      <div className=' w-[95%] rounded-3xl BgGradient GlassBg py-2 px-2 md:hidden Mlg:block'>
+        <div className='grid lg:grid-cols-3 justify-center items-start gap-5 lg:px-2 w-full'>
+          <div className='flex flex-col justify-center items-center py-2 bg-[#ffffff3d] rounded-3xl GlassBg w-full h-[200px]'>
+            <div className='w-[80px] h-[80px] rounded-full bg-[#fff] p-2 mb-2'>
+              <img src={logo} alt="" />
+            </div>
+            <div className='font-bold text-[#fff] mb-3'>IMC Business Solutions</div>
+            <div className=' text-xl flex justify-center items-center gap-5 bg-[#fff] py-2 px-8 rounded-[50px] GlassBg'>
+                <a href="https://www.facebook.com/profile.php?id=100069040622427">
+                  <BiLogoFacebook className=' text-[#ff7301] cursor-pointer SocialHover'/>
+                </a>
+                <a href="https://www.instagram.com/imcbusinesssolution/">
+                  <BiLogoInstagramAlt className=' text-[#ff7301] cursor-pointer SocialHover'/>
+                </a>
+                <a href="">
+                  <IoLogoWhatsapp className=' text-[#ff7301] cursor-pointer SocialHover'/>
+                </a>
+            </div>
+          </div>
+          
+
+          <div className='grid grid-cols-1 place-items-center bg-[#ffffff3d] rounded-3xl GlassBg py-2 w-full h-[200px]'>
+            <div className='text-[#fff] font-bold text-xl lg:text-3xl underline underline-offset-8 mb-5'>Our Services</div>
+            <ul className='flex flex-col justify-center items-center list-disc text-[#fff] font-semibold'>
+              <li>Business Softwares</li>
+              <li>Website and Web Applications</li>
+              <li>Graphic Designing</li>
+              <li>Digital Marketing</li>
+              <li>SEO and Branding</li>
+            </ul>
+          </div>
+          <div className='flex flex-col justify-center items-center mx-auto bg-[#ffffff3d] rounded-3xl GlassBg py-2 w-full h-[200px] px-2'>
+            <div className='text-center text-3xl font-bold text-[#fff] drop-shadow-sm underline underline-offset-8 mb-5'>Explore Our Portfolio</div>
+            
+            <div className='flex justify-center items-center w-full'>
+              <ul className='grid grid-cols-2 gap-x-10 text-[#fff] font-semibold leading-normal list-disc list-inside'>
+                  
+                  <Link to="/websites"><li className=''>Websites</li></Link>
+                  <Link to="/posters"><li className=' '>Posters</li></Link>
+                  <Link to="/brochure"><li className=' '>Brouchers</li></Link>
+                  <Link to="/logos"><li className=' '>Logos</li></Link>
+                  <Link to="/video"><li className=''>Video</li></Link>
+                  <Link to="/instagram"><li className=''>Instagram</li></Link>
+                  <Link to="/facebook"><li className=''>Facebook</li></Link>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
   )
 }

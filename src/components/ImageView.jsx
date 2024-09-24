@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaTimes, FaArrowLeft, FaArrowRight, FaSearchPlus, FaSearchMinus } from "react-icons/fa";
+import { Helmet } from 'react-helmet';
+
 
 const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
   const [currentIdx, setCurrentIdx] = useState(currentIndex);
@@ -7,6 +9,10 @@ const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
   const [zoom, setZoom] = useState(1);
   const contentRef = useRef(null);
   const [startX, setStartX] = useState(null);
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   useEffect(() => {
     setCurrentIdx(currentIndex);
@@ -78,8 +84,9 @@ const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
   if (urls.length === 0 || currentIdx < 0 || currentIdx >= urls.length) return null; // Prevent rendering if no URLs or invalid index
 
   return (
-    <div 
-      className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-80 z-50"
+    <div className=' inset-0  bg-black bg-opacity-80 z-50 fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center h-[100vh]'>
+      <div 
+      className=""
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       onDoubleClick={handleDoubleClick}
@@ -92,7 +99,7 @@ const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
       </button>
       <button 
         onClick={handlePrev} 
-        className="absolute left-4 text-white text-3xl cursor-pointer z-10"
+        className="absolute left-4 text-white text-3xl cursor-pointer z-10 hidden md:block"
       >
         <FaArrowLeft />
       </button>
@@ -112,7 +119,7 @@ const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
             <img 
               src={urls[currentIdx]} 
               alt="Preview" 
-              className="max-w-full max-h-full object-contain"
+              className="w-auto h-[90vh] object-contain"
             />
           )}
         </div>
@@ -127,10 +134,11 @@ const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
       </div>
       <button 
         onClick={handleNext} 
-        className="absolute right-4 text-white text-3xl cursor-pointer"
+        className="absolute right-4 text-white text-3xl cursor-pointer hidden md:block"
       >
         <FaArrowRight />
       </button>
+    </div>
     </div>
   );
 };

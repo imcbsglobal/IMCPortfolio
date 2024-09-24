@@ -1,114 +1,3 @@
-// import React, { useEffect, useState } from 'react';
-// import '@react-pdf-viewer/core/lib/styles/index.css';
-// import { db, storage, auth } from "./Firebase";
-// import { ref, onValue, remove } from "firebase/database";
-// import { ref as storageRef, deleteObject } from "firebase/storage";
-// import UploadPdf from './UploadPdf';
-// import { onAuthStateChanged } from 'firebase/auth';
-// import PDF from "../assets/pdf.png";
-// import Loader from './Loader';
-
-// const Brochure = () => {
-//   const [pdfs, setPdfs] = useState([]);
-//   const [user, setUser] = useState(null);
-//   const [loading, setLoading] = useState(true); // Add loading state
-
-//   useEffect(() => {
-//     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-//       setUser(currentUser);
-//     });
-//     return () => unsubscribe();
-//   }, []);
-
-//   useEffect(() => {
-//     const dbRef = ref(db, 'brochures');
-//     onValue(dbRef, (snapshot) => {
-//       const data = snapshot.val();
-//       console.log("Fetched data:", data); // Debugging line
-
-//       if (data) {
-//         const fetchedPdfs = [];
-//         for (let key in data) {
-//           // Check data structure
-//           console.log(`Processing key: ${key}`, data[key]); // Debugging line
-
-//           // Exclude 'latest' key and ensure URL is a valid PDF
-//           if (key !== 'latest' && data[key] && data[key].url) {
-//             console.log(`Adding PDF with key: ${key} and URL: ${data[key].url}`); // Debugging line
-//             fetchedPdfs.push({ key, url: data[key].url, name: data[key].name });
-//           }
-//         }
-//         console.log("Processed PDFs:", fetchedPdfs); // Debugging line
-//         setPdfs(fetchedPdfs);
-//         setLoading(false); // Set loading to false once data is fetched
-//       }
-//     });
-//   }, []);
-
-//   const handleDelete = async (key, url) => {
-//     try {
-//       await remove(ref(db, `brochures/${key}`));
-//       const fileRef = storageRef(storage, `Brochures/${url.split('/').pop().split('?')[0]}`);
-//       await deleteObject(fileRef);
-//       setPdfs(pdfs.filter(pdf => pdf.key !== key));
-//     } catch (error) {
-//       console.error("Error deleting PDF:", error);
-//     }
-//   };
-
-//   return (
-//     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-//       <section>
-//         <div>
-//           <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal'>Our Brochure</div>
-//           <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]'>
-//             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
-//           </div>
-//         </div>
-
-//         {user && (
-//           <div>
-//             <UploadPdf storagePath="Brochures" dbPath="brochures" />
-//           </div>
-//         )}
-
-//         {loading ? (
-//           <Loader />
-//         ) : (
-//           pdfs.length > 0 ? (
-//             <div className='grid place-items-center grid-cols-1 xlg:grid-cols-2 Mlg:grid-cols-3'>
-//               {pdfs.map(({ key, url, name }) => (
-//                 <div key={key} className='h-[300px] w-[300px] xlg:w-full Mlg:w-[300px] rounded-3xl boxShadow relative mt-10'>
-//                   <div className='w-auto h-[120px] mb-3 mt-3'>
-//                     <img src={PDF} className='w-full h-full object-contain drop-shadow-md' alt="" />
-//                   </div>
-//                   <div className='flex flex-col gap-5 justify-center items-center'>
-//                     <div className='text-[16px] font-semibold'>{name}</div>
-//                     <button className='px-8 py-1 font-bold bg-white rounded-3xl mb-5 shadow-lg' onClick={() => window.open(url, "_blank")}>Click Here</button>
-//                   </div>
-
-//                   {user && (
-//                     <div className='flex justify-center items-center mx-auto bottom-5 left-[30%] Delete-View-Btn'>
-//                       <button onClick={() => handleDelete(key, url)} className='font-bold shadow-2xl border px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'>Delete</button>
-//                     </div>
-//                   )}
-//                 </div>
-//               ))}
-//             </div>
-//           ) : (
-//             <div className='text-center mt-10'>
-//               <span className='text-sm md:text-xl font-semibold fontName text-[#343434]'>No brochures available.</span>
-//             </div>
-//           )
-//         )}
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default Brochure;
-
-
 import React, { useEffect, useState } from 'react';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import { db, storage, auth } from "./Firebase";
@@ -118,11 +7,17 @@ import UploadPdf from './UploadPdf';
 import { onAuthStateChanged } from 'firebase/auth';
 // import PDF from "../assets/pdf.png";
 import Loader from './Loader';
+import { Helmet } from 'react-helmet';
+
 
 const Brochure = () => {
   const [pdfs, setPdfs] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -168,14 +63,17 @@ const Brochure = () => {
   };
 
   return (
+    <>
+    <Helmet>
+        <title>Our Websites | Quality Web Development</title>
+        <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
+        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala" />
+      </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
       <div>
-          <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal">
+          <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center">
             Our Brochures
-          </div>
-          <div className="p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
           </div>
         </div>
           <div className=' mt-[-30px]'>
@@ -221,6 +119,7 @@ const Brochure = () => {
         </div>
       </section>
     </div>
+    </>
   );
 };
 

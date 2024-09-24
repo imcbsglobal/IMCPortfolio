@@ -6,6 +6,8 @@ import UploadFile from './UploadFile';
 import { onAuthStateChanged } from 'firebase/auth';
 import ImageView from './ImageView';
 import Loader from './Loader';
+import { Helmet } from 'react-helmet';
+
 
 const Logos = () => {
   const [logos, setLogos] = useState([]);
@@ -15,6 +17,10 @@ const Logos = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // Add loading state
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
 
   // Check if admin is logged in
   useEffect(() => {
@@ -67,13 +73,16 @@ const Logos = () => {
   };
 
   return (
+    <>
+    <Helmet>
+        <title>Our Websites | Quality Web Development</title>
+        <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
+        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala" />
+      </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
         <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal'>Our Logos</div>
-          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]'>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
-          </div>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Our Logos</div>
         </div>
 
         {user && (
@@ -117,6 +126,7 @@ const Logos = () => {
         )}
       </section>
     </div>
+    </>
   );
 };
 

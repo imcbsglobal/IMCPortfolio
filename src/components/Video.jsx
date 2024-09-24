@@ -4,11 +4,17 @@ import { ref as dbRef, onValue, remove } from "firebase/database";
 import { onAuthStateChanged } from 'firebase/auth';
 import UploadVideo from './UploadVideo';
 import Loader from './Loader';
+import { Helmet } from 'react-helmet';
+
 
 const Video = () => {
   const [videos, setVideos] = useState([]);
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true)
+
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  })
 
   // Check if Admin is Logged In
   useEffect(() => {
@@ -42,13 +48,17 @@ const Video = () => {
   };
 
   return (
+    <>
+      <Helmet>
+        <title>Our Video | Our Customers Love</title>
+        <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
+        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala" />
+      </Helmet>
+
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
       <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
         <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal'>Our Videos</div>
-          <div className='p-5 rounded-2xl text-[#3d1f00] boxShadow xlg:w-[400px] Mlg:w-[600px]'>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestiae nihil praesentium fugit amet, sequi incidunt id recusandae ut aperiam, odit velit eveniet. Reprehenderit fuga aperiam itaque at minus possimus nesciunt?
-          </div>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636]  leading-normal text-center'>Our Videos</div>
         </div>
 
         {user && (
@@ -93,6 +103,7 @@ const Video = () => {
         
       </section>
     </div>
+    </>
   );
 };
 
