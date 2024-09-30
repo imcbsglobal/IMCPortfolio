@@ -34,8 +34,9 @@ const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
   }, []);
 
   const isVideo = (url) => {
-    return url.endsWith('.mp4') || url.endsWith('.mov'); // Add more video extensions as needed
+    return typeof url === 'string' && (url.endsWith('.mp4') || url.endsWith('.mov')); // Add more video extensions as needed
   };
+  
 
   const handlePrev = () => {
     setShowContent(false);

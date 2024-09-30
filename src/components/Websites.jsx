@@ -54,12 +54,12 @@ const Websites = () => {
     }
   };
 
-  const handleView = (urls, index) => {
-    setSelectedImage(urls); // Set an array of URLs
-    setCurrentIndex(index); // Set the initial index
+  const handleView = (index) => {
+    setSelectedImage(images.map((img) => img.url)); // This remains as the array of URLs
+    setCurrentIndex(index); // Pass the clicked index
     setShowImageView(true); // Show the ImageView
   };
-
+  
   const handleCloseImageView = () => {
     setShowImageView(false);
     setSelectedImage([]);
@@ -91,12 +91,12 @@ const Websites = () => {
           <Loader />
         ) : (
           <div className="grid place-items-center md:grid-cols-1 xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-2">
-            {images.map(({ key, url, playStoreLink }) => (
+            {images.map(({ key, url, playStoreLink }, index) => (
               <div key={key} className="h-[300px] w-full rounded-3xl boxShadow relative">
                 <img
                   src={url}
                   alt=""
-                  onClick={() => handleView(url)}
+                  onClick={() => handleView(index)}
                   className="w-full h-full object-cover rounded-3xl"
                 />
 
@@ -119,12 +119,14 @@ const Websites = () => {
               </div>
             ))}
             {showImageView && (
-              <ImageView
-                urls={images.map((img) => img.url)} // Pass all image URLs
-                currentIndex={currentIndex} // Current index in the array
-                onClose={handleCloseImageView}
-              />
-            )}
+              <div className=''>
+                  <ImageView 
+                  urls={selectedImage} // Pass the image URLs
+                  currentIndex={currentIndex} // Current index in the array
+                  onClose={handleCloseImageView} 
+                  />
+              </div>
+              )}
           </div>
         )}
       </section>
