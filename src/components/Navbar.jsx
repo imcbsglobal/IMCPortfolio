@@ -18,6 +18,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { auth } from "./Firebase";
 import { onAuthStateChanged } from 'firebase/auth';
 import { GrMultimedia } from "react-icons/gr";
+import { FaGlobe } from "react-icons/fa6";
 
 const Navbar = () => {
     const [menuBar, setMenuBar] = useState(false);
@@ -96,11 +97,14 @@ const Navbar = () => {
                             <a href="https://www.instagram.com/imcbusinesssolution/">
                                 <div className='text-xl SocialHover'><BiLogoInstagramAlt /></div>
                             </a>
-                            <a href="">
+                            <a href=" https://wa.me/917593820005 ">
                                 <div className='text-xl SocialHover'><IoLogoWhatsapp /></div>
                             </a>
-                            <a href="">
+                            <a href="https://www.youtube.com/@IMCBUSINESSSOLUTIONS">
                                 <div className='text-xl SocialHover'><FaYoutube /></div>
+                            </a>
+                            <a href="https://imcbsglobal.com/">
+                                <div className='text-xl SocialHover'><FaGlobe /></div>
                             </a>
                         </div>
                         <div className='flex justify-center text-center items-center'>

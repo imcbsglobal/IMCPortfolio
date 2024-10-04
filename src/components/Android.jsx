@@ -56,9 +56,9 @@ const Android = () => {
     }
   };
 
-  const handleView = (urls, index) => {
-    setSelectedImage(urls); // Set an array of URLs
-    setCurrentIndex(index); // Set the initial index
+  const handleView = (index) => {
+    setSelectedImage(images.map((img) => img.url)); // This remains as the array of URLs
+    setCurrentIndex(index); // Pass the clicked index
     setShowImageView(true); // Show the ImageView
   };
 
@@ -90,9 +90,9 @@ const Android = () => {
               <Loader/>
             ) : (
               <div className='grid place-items-center xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-10'>
-                {images.map(({ key, url, playStoreLink }) => (
+                {images.map(({ key, url, playStoreLink },index) => (
                     <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
-                        <img src={url} alt="" onClick={() => handleView(url)} className='w-full h-full object-cover rounded-3xl'/>
+                        <img src={url} alt="" onClick={() => handleView(index)} className='w-full h-full object-cover rounded-3xl'/>
                         
                             <div className='absolute flex justify-center items-center mx-auto bottom-5 left-5 Delete-View-Btn gap-5'>
                             {user && (
@@ -105,12 +105,14 @@ const Android = () => {
                     </div>
                 ))}
                 {showImageView && (
-                    <ImageView 
-                    urls={images.map(img => img.url)} // Pass all image URLs
-                    currentIndex={currentIndex} // Current index in the array
-                    onClose={handleCloseImageView} 
-                />
-                )}
+                  <div className=''>
+                      <ImageView 
+                      urls={selectedImage} // Pass the image URLs
+                      currentIndex={currentIndex} // Current index in the array
+                      onClose={handleCloseImageView} 
+                      />
+                  </div>
+              )}
             </div>
             )}
         </section>

@@ -65,12 +65,12 @@ const Home = () => {
       </div> */}
       <div className=' w-[95%] rounded-3xl   py-2  md:hidden Mlg:block'>
         <div className='grid lg:flex justify-center items-center gap-5 w-full'>
-          <div className='flex  flex-col justify-center items-center py-2 bg-[#ffffff3d] rounded-3xl GlassBg w-full h-[200px] border-[#ff7f2a] border-[.1px]'>
+          <div className='flex  flex-col justify-center items-center py-2 bg-[#ffffff3d] rounded-3xl GlassBg w-full h-[230px] border-[#ff7f2a] border-[.1px]'>
             <div className=' px-5 text-[#878282]'>We specialize in delivering tailored solutions to enhance your online presence. From innovative web development and eye-catching graphic designs to comprehensive digital marketing, SEO, and branding strategies, we help businesses stand out and succeed in the digital world.</div>
           </div>
           
 
-          <div className='grid grid-cols-1 place-items-center lg:w-[50%] bg-[#ffffff3d] rounded-3xl GlassBg border-[#ff7f2a] border-[.1px] py-2 w-full h-[200px]'>
+          <div className='grid grid-cols-1 place-items-center lg:w-[50%] bg-[#ffffff3d] rounded-3xl GlassBg border-[#ff7f2a] border-[.1px] py-2 w-full h-[230px]'>
             <div className='text-[#ff7f2a] drop-shadow-sm font-bold text-xl lg:text-3xl underline underline-offset-8 mb-5'>Our Services</div>
             <ul className='flex flex-col justify-center items-start list-disc text-[#878282] font-semibold'>
               <li>Business Softwares</li>
