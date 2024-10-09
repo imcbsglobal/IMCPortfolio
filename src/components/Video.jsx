@@ -50,13 +50,13 @@ const Video = () => {
   return (
     <>
       <Helmet>
-        <title>Our Video | Our Customers Love</title>
+        <title>Video | Our Customers Love</title>
         <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala" />
       </Helmet>
 
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-      <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
+      <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16'>
         <div>
           <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636]  leading-normal text-center'>Our Videos</div>
         </div>
@@ -70,7 +70,7 @@ const Video = () => {
         {loading ? (
           <Loader/>
         ) : (
-          <div className='mt-10 grid grid-cols-1 xlg:grid-cols-2 gap-5 place-items-center lg:place-items-start Mlg:gap-5'>
+          <div className='mt-5 grid grid-cols-1 xlg:grid-cols-2 gap-5 place-items-center lg:place-items-start Mlg:gap-5'>
           {videos.map((video) => (
             video.url && (
               <div key={video.id} className='relative xlg:w-full Mlg:w-[400px] h-[300px] w-[300px]'>

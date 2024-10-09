@@ -17,6 +17,7 @@ const UploadPdf = ({ storagePath, dbPath }) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const inRef = useRef();
   const thumbnailRef = useRef();
+  const [brochureType, setBrochureType] = useState('common'); // Default to 'common'
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -25,6 +26,10 @@ const UploadPdf = ({ storagePath, dbPath }) => {
     });
     return () => unsubscribe();
   }, []);
+
+  const handleBrochureTypeChange = (e) => {
+    setBrochureType(e.target.value.toLowerCase());
+  };
 
   const selectFile = () => {
     inRef.current.click();
@@ -60,8 +65,8 @@ const UploadPdf = ({ storagePath, dbPath }) => {
     setIsLoading(true);
     setIsError(false);
 
-    const storageRef = ref(storage, `${storagePath}/${fileName}`);
-    const thumbnailRef = ref(storage, `${storagePath}/thumbnails/${fileName}`);
+    const storageRef = ref(storage, `${storagePath}/${brochureType}/${fileName}`);
+    const thumbnailRef = ref(storage, `${storagePath}/thumbnails/${brochureType}/${fileName}`);
 
     const uploadTask = uploadBytesResumable(storageRef, file);
     const uploadThumbnailTask = uploadBytesResumable(thumbnailRef, thumbnail);
@@ -94,9 +99,13 @@ const UploadPdf = ({ storagePath, dbPath }) => {
               try {
                 const thumbnailUrl = await getDownloadURL(uploadThumbnailTask.snapshot.ref);
                 setThumbnailUrl(thumbnailUrl);
-                const newFileRef = push(dbRef(db, dbPath));
-                await set(newFileRef, { name: fileName, pdfUrl, thumbnailUrl });
-                await set(dbRef(db, `${dbPath}/latest`), { name: fileName, pdfUrl, thumbnailUrl });
+                const newFileRef = push(dbRef(db, `${dbPath}/${brochureType}`));
+                await set(newFileRef, { 
+                  name: fileName, 
+                  pdfUrl, 
+                  thumbnailUrl,
+                  type: brochureType
+                });
                 setIsLoading(false);
                 setShowSuccess(true);
                 setTimeout(() => {
@@ -121,42 +130,27 @@ const UploadPdf = ({ storagePath, dbPath }) => {
   return (
     <div>
       <div className='flex justify-center items-center gap-10 mt-10'>
-        <input 
-          type="file" 
-          accept='application/pdf' 
-          ref={inRef} 
-          className='hidden' 
-          onChange={handleInputFile} 
-        />
-        <input 
-          type="file" 
-          accept='image/*' 
-          ref={thumbnailRef} 
-          className='hidden' 
-          onChange={handleInputThumbnail} 
-        />
+        <input type="file" accept='application/pdf' ref={inRef} className='hidden' onChange={handleInputFile} />
+        <input type="file" accept='image/*' ref={thumbnailRef} className='hidden' onChange={handleInputThumbnail} />
         {user && (
           <div className='grid grid-cols-2 place-items-center place-content-center Mlg:grid-cols-3 justify-center items-center gap-10 mt-10'>
-            <button 
-              className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]' 
-              onClick={selectFile}
-            >
-              Select PDF<span className='text-[#ff9019]'><FaSquarePlus /></span>
-            </button>
-            <button 
-              className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]' 
-              onClick={selectThumbnail}
-            >
-              Select Thumbnail<span className='text-[#ff9019]'><FaSquarePlus /></span>
-            </button>
-            <button 
-              onClick={handleFileUpload} 
-              className='flex items-center gap-2 md:text-xl text-sm bg-white px-8 py-2 rounded-xl shadow-lg font-bold text-[#343434] border border-[#eaeaea]'
-              disabled={!file || !thumbnail || isLoading}
-            >
-              Upload <span className='text-[#ff9019]'><FaSquarePlus /></span>
-            </button>
-          </div>
+          <button className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]' onClick={selectFile}>
+            Select PDF<span className='text-[#ff9019]'><FaSquarePlus /></span>
+          </button>
+          <button className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]' onClick={selectThumbnail}>
+            Select Thumbnail<span className='text-[#ff9019]'><FaSquarePlus /></span>
+          </button>
+          <select 
+            onChange={handleBrochureTypeChange} 
+            className='md:text-xl text-sm bg-white px-8 py-2 shadow-lg font-bold text-[#343434] rounded-xl flex justify-center items-center gap-2 border border-[#eaeaea]'
+          >
+            <option value="Common">Common Brochure</option>
+            <option value="Own">Own Brochure</option>
+          </select>
+          <button onClick={handleFileUpload} className='flex items-center gap-2 md:text-xl text-sm bg-white px-8 py-2 rounded-xl shadow-lg font-bold text-[#343434] border border-[#eaeaea]' disabled={!file || !thumbnail || isLoading}>
+            Upload <span className='text-[#ff9019]'><FaSquarePlus /></span>
+          </button>
+        </div>
         )}
       </div>
       <div className='text-center mt-10'>

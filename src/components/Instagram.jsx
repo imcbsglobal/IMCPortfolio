@@ -69,14 +69,14 @@ const Instagram = () => {
   return (
     <>
     <Helmet>
-        <title>Our Websites | Quality Web Development</title>
+        <title>Digital Marketing | Quality Web Development</title>
         <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala" />
       </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-      <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
+      <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16'>
         <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Our Instagram Pages</div>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Instagram Pages</div>
         </div>
 
         {user && (
@@ -88,7 +88,7 @@ const Instagram = () => {
         {loading ? (
           <Loader/>
         ) : (
-          <div className='grid place-items-center grid-cols-1 xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-10'>
+          <div className='grid place-items-center grid-cols-1 xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 '>
           {images.map(({ key, url, playStoreLink }, index) => (
             <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
               <img src={url} alt="" onClick={() => handleView(images, index)} className='w-full h-full object-cover rounded-3xl'/>

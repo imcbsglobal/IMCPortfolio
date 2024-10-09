@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar"
 import Posters from "./components/Posters"
 import Video from "./components/Video"
 import Websites from "./components/Websites"
+import WebApplication from "./components/WebApplication"
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/android" element={<Android />} />
+        <Route path="/webapplication" element={<WebApplication />} />
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/logos" element={<Logos />} />
         <Route path="/brochure" element={<Brocher/>} />

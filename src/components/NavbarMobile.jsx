@@ -19,12 +19,7 @@ import { PiPencilCircleBold } from "react-icons/pi";
 import { BsInstagram } from "react-icons/bs";
 import { BiLogoFacebook } from "react-icons/bi";
 import { GrMultimedia } from "react-icons/gr";
-
-
-
-
-
-
+import { FaGlobe } from "react-icons/fa6";
 
 const NavbarMobile = ({setMenuBar}) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -114,10 +109,18 @@ const NavbarMobile = ({setMenuBar}) => {
                         </div>
                     </li>
                     <li>
+                        <Link to='/webapplication' onClick={() => setMenuBar(false)}>
+                            <div className=' flex justify-center items-center gap-5'>
+                                <div className=' text-[#ff9100]'><FaGlobe/></div>
+                                <div>Web App</div>
+                            </div>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to='/android' onClick={() => setMenuBar(false)}>
                             <div className=' flex justify-center items-center gap-5'>
                                 <div className=' text-[#ff9100]'><BsAndroid2/></div>
-                                <div>App</div>
+                                <div>Mobile App</div>
                             </div>
                         </Link>
                     </li>

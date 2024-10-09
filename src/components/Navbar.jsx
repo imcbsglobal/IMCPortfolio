@@ -19,6 +19,7 @@ import { auth } from "./Firebase";
 import { onAuthStateChanged } from 'firebase/auth';
 import { GrMultimedia } from "react-icons/gr";
 import { FaGlobe } from "react-icons/fa6";
+import { IoGlobeOutline } from "react-icons/io5";
 
 const Navbar = () => {
     const [menuBar, setMenuBar] = useState(false);
@@ -57,7 +58,7 @@ const Navbar = () => {
             <header className=' m-0 p-0 fixed w-full '>
                 {menuBar && <NavbarMobile setMenuBar={setMenuBar} />}
                 <div className=' relative '>
-                    <nav className='flex items-center justify-between px-8 mt-5 md:hidden bg-[#fff] rounded-3xl GlassBg'>
+                    <nav className='flex items-center justify-between px-8 md:hidden bg-[#fff] rounded-3xl GlassBg'>
                         <div className='flex items-center gap-5'>
                             <CgMenuLeftAlt onClick={() => setMenuBar(true)} className='text-3xl cursor-pointer md:hidden text-[hsl(26,100%,50%)]' />
                             {user ? (
@@ -69,7 +70,7 @@ const Navbar = () => {
                             )}
                         </div>
                         <div className='p-2'>
-                            <img src={logo} className='w-auto h-[50px] cursor-pointer' alt="" />
+                            <a href="https://imcportfolio.in/"><img src={logo} className='w-auto h-[50px] cursor-pointer' alt="" /></a>
                         </div>
                     </nav>
                 </div>
@@ -87,7 +88,7 @@ const Navbar = () => {
                             </div>
                         )}
                         <div className='w-[80px] h-auto mx-auto mb-5'>
-                            <img src={logo} className='w-full h-full drop-shadow-md' alt="" />
+                            <a href="https://imcportfolio.in/"><img src={logo} className='w-full h-full drop-shadow-md' alt="" /></a>
                         </div>
                         <div className='text-center text-2xl font-semibold mb-5'>IMC Business Solution</div>
                         <div className='flex justify-center items-center gap-10 mb-5 bg-white p-5 rounded-full BoxShadow'>
@@ -157,9 +158,15 @@ const Navbar = () => {
                                     </div>
                                 </li>
                                 <li className='NavbarHover'>
+                                    <NavLink to="/webapplication" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><IoGlobeOutline /></div>
+                                        <div>Web Apps</div>
+                                    </NavLink>
+                                </li>
+                                <li className='NavbarHover'>
                                     <NavLink to="/android" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                         <div><BsAndroid2 /></div>
-                                        <div>App</div>
+                                        <div>Mobile Apps</div>
                                     </NavLink>
                                 </li>
                                 <li className='NavbarHover'>
