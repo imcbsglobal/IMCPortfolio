@@ -12,14 +12,13 @@ import { Helmet } from 'react-helmet';
 import AppImageView from './AppImageView';
 import DescriptionView from './DescriptionView';
 
-const Android = () => {
+const Software = () => {
   const [images, setImages] = useState([]);
   const [selectedPhotos, setSelectedPhotos] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [openDescription, setOpenDescription] = useState(false)
-
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,7 +27,7 @@ const Android = () => {
         setUser(currentUser);
     });
 
-    const dbRef = ref(db, 'android');
+    const dbRef = ref(db, 'software');
     onValue(dbRef, (snapshot) => {
         const data = snapshot.val();
         const fetchedImages = [];
@@ -46,11 +45,11 @@ const Android = () => {
     });
 
     return () => unsubscribe();
-}, []);
+ }, []);
 
 const handleDelete = async (key, urls) => {
   try {
-      await remove(ref(db, `android/${key}`));
+      await remove(ref(db, `software/${key}`));
       
       // Delete all associated images
       const allUrls = [urls.thumbnailUrl, ...urls.photos];
@@ -70,27 +69,24 @@ const handleView = (photos) => {
   setShowImageView(true);
 };
 
-  // const handleCloseImageView = () => {
-  //   setShowImageView(false);
-  //   setSelectedImage([]);
-  // };
+
 
   return (
     <>
     <Helmet>
         <title>Mobile App | Quality Web Development | Mobile App Development</title>
         <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
-        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, mobile app development, mobile app, android app, android" />
+        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, mobile app development, mobile app, webapp app, webapp" />
       </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
         <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
             <div>
-                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Mobile Apps</div>
+                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Web Apps</div>
             </div>
 
             {user && (
               <div className='mb-5'>
-               <UploadApp storagePath="Android" dbPath="android" />
+               <UploadApp storagePath="software" dbPath="software" />
               </div>
             )}
             
@@ -114,14 +110,14 @@ const handleView = (photos) => {
                                         {user && (
                                             <button 
                                                 onClick={() => handleDelete(key, { thumbnailUrl, photos })}
-                                                className='font-bold shadow-2xl px-8 py-2 bg-[#ff2525] text-[13px] rounded-3xl text-white text-center mx-auto'
+                                                className='font-bold shadow-2xl text-[13px] px-8 py-2 bg-[#ff2525] rounded-3xl text-white text-center mx-auto'
                                             >
                                                 Delete
                                             </button>
                                         )}
                                         <button 
                                             onClick={() => handleView(photos)}
-                                            className='font-bold shadow-2xl px-8 py-2 rounded-3xl text-[13px] border-[#ff8912] border bg-white'
+                                            className='font-bold shadow-2xl px-8 text-[13px] py-2 rounded-3xl border-[#ff8912] border bg-white'
                                         >
                                             View
                                         </button>
@@ -152,4 +148,4 @@ const handleView = (photos) => {
     );
 };
 
-export default Android;
+export default Software

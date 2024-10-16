@@ -20,6 +20,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { GrMultimedia } from "react-icons/gr";
 import { FaGlobe } from "react-icons/fa6";
 import { IoGlobeOutline } from "react-icons/io5";
+import { HiDesktopComputer } from "react-icons/hi";
+import { IoHardwareChip } from "react-icons/io5";
 
 const Navbar = () => {
     const [menuBar, setMenuBar] = useState(false);
@@ -158,15 +160,27 @@ const Navbar = () => {
                                     </div>
                                 </li>
                                 <li className='NavbarHover'>
+                                    <NavLink to="/android" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><BsAndroid2 /></div>
+                                        <div>Mobile Apps</div>
+                                    </NavLink>
+                                </li>
+                                <li className='NavbarHover'>
                                     <NavLink to="/webapplication" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                         <div><IoGlobeOutline /></div>
                                         <div>Web Apps</div>
                                     </NavLink>
                                 </li>
                                 <li className='NavbarHover'>
-                                    <NavLink to="/android" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
-                                        <div><BsAndroid2 /></div>
-                                        <div>Mobile Apps</div>
+                                    <NavLink to="/software" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><HiDesktopComputer /></div>
+                                        <div>Software</div>
+                                    </NavLink>
+                                </li>
+                                <li className='NavbarHover'>
+                                    <NavLink to="/hardware" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><IoHardwareChip /></div>
+                                        <div>Hardware</div>
                                     </NavLink>
                                 </li>
                                 <li className='NavbarHover'>

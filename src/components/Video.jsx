@@ -56,9 +56,9 @@ const Video = () => {
       </Helmet>
 
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-      <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16'>
+      <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
         <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636]  leading-normal text-center'>Our Videos</div>
+          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636]  leading-normal text-center'> Videos</div>
         </div>
 
         {user && (

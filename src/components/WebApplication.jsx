@@ -10,6 +10,8 @@ import { auth } from './Firebase';
 import Loader from './Loader';
 import { Helmet } from 'react-helmet';
 import AppImageView from './AppImageView';
+import DescriptionView from './DescriptionView';
+
 
 const WebApplication = () => {
   const [images, setImages] = useState([]);
@@ -17,7 +19,7 @@ const WebApplication = () => {
   const [showImageView, setShowImageView] = useState(false);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-
+  const [openDescription, setOpenDescription] = useState(false)
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -76,7 +78,7 @@ const handleView = (photos) => {
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, mobile app development, mobile app, webapp app, webapp" />
       </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-        <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16'>
+        <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
             <div>
                 <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Web Apps</div>
             </div>
@@ -93,6 +95,9 @@ const handleView = (photos) => {
               <div className='grid place-items-center xlg:grid-cols-2 Mlg:grid-cols-3 gap-10'>
                             {images.map(({ key, thumbnailUrl, photos }) => (
                                 <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
+                                    <button onClick={()=>setOpenDescription(!openDescription)} className='px-6 py-2 rounded-3xl bg-[#ff8912] font-bold text-[13px] absolute top-2 text-[#fff] left-2 Delete-View-Btn'>
+                                            Details
+                                    </button>
                                     <img 
                                         src={thumbnailUrl} 
                                         alt="Thumbnail" 
@@ -104,14 +109,14 @@ const handleView = (photos) => {
                                         {user && (
                                             <button 
                                                 onClick={() => handleDelete(key, { thumbnailUrl, photos })}
-                                                className='font-bold shadow-2xl px-8 py-2 bg-[#ff8912] rounded-3xl text-white text-center mx-auto'
+                                                className='font-bold shadow-2xl px-8 py-2 bg-[#ff1919] text-[13px] rounded-3xl text-white text-center mx-auto'
                                             >
                                                 Delete
                                             </button>
                                         )}
                                         <button 
                                             onClick={() => handleView(photos)}
-                                            className='font-bold shadow-2xl px-8 py-2 rounded-3xl bg-white'
+                                            className='font-bold shadow-2xl px-8 py-2 rounded-3xl border-[#ff8912] border text-[13px] bg-white'
                                         >
                                             View
                                         </button>
@@ -132,6 +137,11 @@ const handleView = (photos) => {
                     )}
                 </section>
             </div>
+            {openDescription && (
+                <div>
+                    <DescriptionView setOpenDescription={setOpenDescription}/>
+                </div>
+            )}
         </>
     );
 };

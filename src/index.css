@@ -249,3 +249,11 @@ box-shadow: 7px 14px 20px -12px rgba(0,0,0,0.89); */
   background: linear-gradient(120deg, rgba(243,128,19,1) 0%, rgba(255,102,0,1) 38%, rgba(253,133,53,1) 100%);
   border: 1px solid white;
 }
+textarea::-webkit-input-placeholder{
+  color: azure;
+}
+.GlassBg{
+  backdrop-filter: blur(10px);
+  border: 1px solid white;
+  background-color: #ffffff78;
+}

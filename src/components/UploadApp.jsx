@@ -57,7 +57,7 @@ const UploadApp = ({ storagePath, dbPath }) => {
     };
 
     const handleUpload = async () => {
-        if (!thumbnailFile || !firstPhotoFile || secondPhotoFile || thirdPhotoFile) {
+        if (!thumbnailFile && !firstPhotoFile && !secondPhotoFile && !thirdPhotoFile) {
             alert('Please select all required images');
             return;
         }
@@ -174,6 +174,10 @@ const UploadApp = ({ storagePath, dbPath }) => {
                                 Third Photo
                             </button>
                             {thirdPhotoFile && <span className="mt-2 text-sm text-green-600">Selected</span>}
+                        </div>
+                        {/* Description Section */}
+                        <div className='w-full flex justify-center items-center border-none outline-none'>
+                            <textarea name="" id="" placeholder='Enter Description' className='outline-none border-none w-full py-3 px-2 rounded-xl bg-[#ff9019] text-[#fff] border-[#fff] border'></textarea>
                         </div>
                     </div>
 

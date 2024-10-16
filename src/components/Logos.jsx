@@ -80,7 +80,7 @@ const Logos = () => {
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala,logo creation, make logo,creative logo,logo work" />
       </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-      <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
+      <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
         <div>
           <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Logos</div>
         </div>
@@ -94,7 +94,7 @@ const Logos = () => {
         {loading ? (
           <Loader />
         ) : (
-          <div className='grid place-items-center xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-10'>
+          <div className='grid place-items-center xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-5'>
             {logos.map(({ key, url }, index) => (
               <div key={key} className='h-[300px] w-full rounded-3xl boxShadow1 relative'>
                 <img 

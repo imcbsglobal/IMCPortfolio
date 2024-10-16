@@ -22,13 +22,9 @@ const UploadVideo = ({ dbPath }) => {
     if (!videoUrl) return;
     setIsLoading(true);
 
-    // Remove the current latest video before uploading a new one
-    const latestVideoRef = dbRef(db, `${dbPath}/latest`);
-    remove(latestVideoRef)
-      .then(() => {
-        // Upload the new video to the latest path
-        return set(latestVideoRef, { url: videoUrl });
-      })
+    // Push the new video to the database, creating a unique key for each video
+    const newVideoRef = push(dbRef(db, dbPath));  // Create a unique key
+    set(newVideoRef, { url: videoUrl })
       .then(() => {
         setIsLoading(false);
         setShowSuccess(true);

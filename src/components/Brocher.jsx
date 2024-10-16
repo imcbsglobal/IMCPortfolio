@@ -77,7 +77,7 @@ const Brochure = () => {
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, brochure works, brochure work, brochure creation" />
       </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-      <section className='Mlg:max-w-[1200px] Mlg:mx-auto'>
+      <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
       <div>
           <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center">
             Brochures
@@ -104,7 +104,7 @@ const Brochure = () => {
           </div>
           )}
           
-          <div className='grid place-items-center md:grid-cols-1 xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-10'>
+          <div className='grid place-items-center md:grid-cols-1 xlg:grid-cols-2 Mlg:grid-cols-3 gap-10 mt-5'>
               {loading ? <Loader /> : filteredPdfs.map((pdf) => (
                 <div key={pdf.key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
                   <img src={pdf.thumbnailUrl} alt={pdf.name} className='w-full h-full object-cover rounded-3xl' />
