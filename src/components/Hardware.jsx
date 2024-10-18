@@ -26,7 +26,7 @@ const Hardware = () => {
         setUser(currentUser);
     });
 
-    const dbRef = ref(db, 'webapp');
+    const dbRef = ref(db, 'hardware');
     onValue(dbRef, (snapshot) => {
         const data = snapshot.val();
         const fetchedImages = [];
@@ -48,7 +48,7 @@ const Hardware = () => {
 
 const handleDelete = async (key, urls) => {
   try {
-      await remove(ref(db, `webapp/${key}`));
+      await remove(ref(db, `hardware/${key}`));
       
       // Delete all associated images
       const allUrls = [urls.thumbnailUrl, ...urls.photos];
@@ -71,19 +71,19 @@ const handleView = (photos) => {
   return (
     <>
     <Helmet>
-        <title>Mobile App | Quality Web Development | Mobile App Development</title>
+        <title>Hardware | Hardware & Software | Quality Web Development</title>
         <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
-        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, mobile app development, mobile app, webapp app, webapp" />
+        <meta name="keywords" content="web development,hardware,hardware and software,hardware kerala,hardware kalpeta,hardware batheri, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, mobile app development, mobile app, webapp app, webapp" />
       </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
         <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
             <div>
-                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Web Apps</div>
+                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Hardwares</div>
             </div>
 
             {user && (
               <div className='mb-5'>
-               <UploadApp storagePath="webapp" dbPath="webapp" />
+               <UploadApp storagePath="hardware" dbPath="hardware" />
               </div>
             )}
             

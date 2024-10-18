@@ -72,7 +72,7 @@ const Posters = () => {
   return (
     <>
     <Helmet>
-        <title> Posters | Quality Web Development |Poster Creation | Poster Work</title>
+        <title> Posters | Graphic Design |Poster Creation | Poster Work</title>
         <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, poster creation, poster works, poster work,graphic designs, graphic design wayanad, graphic design kalpeta,poster work kalpeta, poster work batheri, graphic design batheri, top graphic work wayanad," />
       </Helmet>

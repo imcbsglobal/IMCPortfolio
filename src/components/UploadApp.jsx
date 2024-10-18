@@ -16,6 +16,7 @@ const UploadApp = ({ storagePath, dbPath }) => {
     const [showSuccess, setShowSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
     const [user, setUser] = useState(null);
+    const [description, setDescription] = useState('');
     
     const thumbnailRef = useRef();
     const firstPhotoRef = useRef();
@@ -64,10 +65,8 @@ const UploadApp = ({ storagePath, dbPath }) => {
 
         setIsLoading(true);
         try {
-            // Upload thumbnail
+            // Upload thumbnail and photos (previous code)
             const thumbnailUrl = await uploadPhoto(thumbnailFile, 'thumbnail');
-            
-            // Upload other photos
             const firstPhotoUrl = await uploadPhoto(firstPhotoFile, 'first');
             const secondPhotoUrl = await uploadPhoto(secondPhotoFile, 'second');
             const thirdPhotoUrl = await uploadPhoto(thirdPhotoFile, 'third');
@@ -77,6 +76,7 @@ const UploadApp = ({ storagePath, dbPath }) => {
             await set(newImageRef, {
                 thumbnailUrl,
                 photos: [firstPhotoUrl, secondPhotoUrl, thirdPhotoUrl],
+                description: description, // Add description to the database
                 timestamp: Date.now()
             });
 
@@ -91,6 +91,7 @@ const UploadApp = ({ storagePath, dbPath }) => {
             setFirstPhotoFile(null);
             setSecondPhotoFile(null);
             setThirdPhotoFile(null);
+            setDescription(''); // Reset description
         } catch (error) {
             setIsError(true);
             console.error('Upload error:', error);
@@ -177,7 +178,12 @@ const UploadApp = ({ storagePath, dbPath }) => {
                         </div>
                         {/* Description Section */}
                         <div className='w-full flex justify-center items-center border-none outline-none'>
-                            <textarea name="" id="" placeholder='Enter Description' className='outline-none border-none w-full py-3 px-2 rounded-xl bg-[#ff9019] text-[#fff] border-[#fff] border'></textarea>
+                        <textarea 
+                            placeholder='Enter Description' 
+                            className='outline-none border-none w-full py-3 px-2 rounded-xl bg-[#ff9019] text-[#fff] border-[#fff] border'
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        ></textarea>
                         </div>
                     </div>
 

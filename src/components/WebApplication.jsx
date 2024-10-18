@@ -20,6 +20,7 @@ const WebApplication = () => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [openDescription, setOpenDescription] = useState(false)
+  const [selectedKey, setSelectedKey] = useState(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -37,7 +38,8 @@ const WebApplication = () => {
                 fetchedImages.push({
                     key,
                     thumbnailUrl: data[key].thumbnailUrl,
-                    photos: data[key].photos
+                    photos: data[key].photos,
+                    description: data[key].description
                 });
             }
         }
@@ -73,14 +75,14 @@ const handleView = (photos) => {
   return (
     <>
     <Helmet>
-        <title>Mobile App | Quality Web Development | Mobile App Development</title>
+        <title>Web Applications | Quality Web Development | Web App Development</title>
         <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, mobile app development, mobile app, webapp app, webapp" />
       </Helmet>
     <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
         <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
             <div>
-                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Web Apps</div>
+                <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center'>Web Applications</div>
             </div>
 
             {user && (
@@ -95,7 +97,11 @@ const handleView = (photos) => {
               <div className='grid place-items-center xlg:grid-cols-2 Mlg:grid-cols-3 gap-10'>
                             {images.map(({ key, thumbnailUrl, photos }) => (
                                 <div key={key} className='h-[300px] w-full rounded-3xl boxShadow relative'>
-                                    <button onClick={()=>setOpenDescription(!openDescription)} className='px-6 py-2 rounded-3xl bg-[#ff8912] font-bold text-[13px] absolute top-2 text-[#fff] left-2 Delete-View-Btn'>
+                                    <button onClick={() => {
+                                            setSelectedKey(key);
+                                            setOpenDescription(true);
+                                            }}  
+                                            className='px-6 py-2 rounded-3xl bg-[#ff8912] font-bold text-[13px] absolute top-2 text-[#fff] left-2 Delete-View-Btn'>
                                             Details
                                     </button>
                                     <img 
@@ -139,7 +145,10 @@ const handleView = (photos) => {
             </div>
             {openDescription && (
                 <div>
-                    <DescriptionView setOpenDescription={setOpenDescription}/>
+                    <DescriptionView 
+                        setOpenDescription={setOpenDescription}
+                        description={images.find(img => img.key === selectedKey)?.description}
+                    />
                 </div>
             )}
         </>

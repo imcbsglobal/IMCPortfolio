@@ -72,7 +72,7 @@ const Brochure = () => {
   return (
     <>
     <Helmet>
-        <title> Websites | Quality Web Development | Brochure</title>
+        <title> Brochures | Graphic Design | Brochure Creation</title>
         <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
         <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala, brochure works, brochure work, brochure creation" />
       </Helmet>

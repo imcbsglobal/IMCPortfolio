@@ -119,16 +119,40 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                                 <li className='NavbarHover'>
+                                    <NavLink to="/software" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><HiDesktopComputer /></div>
+                                        <div>ERP Softwares</div>
+                                    </NavLink>
+                                </li>
+                                <li className='NavbarHover'>
                                     <NavLink to="/websites" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                         <div><FaEarthAmericas /></div>
                                         <div>Websites</div>
                                     </NavLink>
                                 </li>
                                 <li className='NavbarHover'>
+                                    <NavLink to="/android" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><BsAndroid2 /></div>
+                                        <div>Mobile Application</div>
+                                    </NavLink>
+                                </li>
+                                <li className='NavbarHover'>
+                                    <NavLink to="/hardware" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><IoHardwareChip /></div>
+                                        <div>Hardware</div>
+                                    </NavLink>
+                                </li>
+                                <li className='NavbarHover'>
+                                    <NavLink to="/webapplication" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                        <div><IoGlobeOutline /></div>
+                                        <div>Web Application</div>
+                                    </NavLink>
+                                </li>
+                                <li className='NavbarHover'>
                                     <div className='flex flex-col'>
                                         <div className='flex justify-center items-center gap-5 cursor-pointer' onClick={toggleDropdown}>
                                             <div><RiPencilRulerFill /></div>
-                                            <div>Designs</div>
+                                            <div>Graphic Design</div>
                                         </div>
                                         {isOpen && (
                                             <motion.ul
@@ -159,41 +183,12 @@ const Navbar = () => {
                                         )}
                                     </div>
                                 </li>
-                                <li className='NavbarHover'>
-                                    <NavLink to="/android" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
-                                        <div><BsAndroid2 /></div>
-                                        <div>Mobile Apps</div>
-                                    </NavLink>
-                                </li>
-                                <li className='NavbarHover'>
-                                    <NavLink to="/webapplication" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
-                                        <div><IoGlobeOutline /></div>
-                                        <div>Web Apps</div>
-                                    </NavLink>
-                                </li>
-                                <li className='NavbarHover'>
-                                    <NavLink to="/software" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
-                                        <div><HiDesktopComputer /></div>
-                                        <div>Software</div>
-                                    </NavLink>
-                                </li>
-                                <li className='NavbarHover'>
-                                    <NavLink to="/hardware" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
-                                        <div><IoHardwareChip /></div>
-                                        <div>Hardware</div>
-                                    </NavLink>
-                                </li>
-                                <li className='NavbarHover'>
-                                    <NavLink to="/video" className={({ isActive }) => `flex justify-center items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
-                                        <div><PiVideoFill /></div>
-                                        <div>Video</div>
-                                    </NavLink>
-                                </li>
+                                
                                 <li className='NavbarHover'>
                                     <div className='flex flex-col'>
                                         <div className='flex justify-center items-center gap-5 cursor-pointer' onClick={toggleDropdown2}>
                                             <div><GrMultimedia /></div>
-                                            <div>Social Media</div>
+                                            <div>Digital Marketing</div>
                                         </div>
                                         {socialOpen && (
                                             <motion.ul
@@ -212,6 +207,12 @@ const Navbar = () => {
                                                     <NavLink to="/facebook" className={({ isActive }) => `flex justify-start items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
                                                         <div><BiLogoFacebook /></div>
                                                         <div>Facebook</div>
+                                                    </NavLink>
+                                                </li>
+                                                <li className='mt-3 insideNavbarHover'>
+                                                    <NavLink to="/video" className={({ isActive }) => `flex justify-start items-center gap-5 ${isActive ? 'text-[#ff9100] font-bold' : ''}`}>
+                                                        <div><PiVideoFill /></div>
+                                                        <div>Video</div>
                                                     </NavLink>
                                                 </li>
                                             </motion.ul>
