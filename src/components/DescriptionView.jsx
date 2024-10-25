@@ -6,12 +6,12 @@ const DescriptionView = ({setOpenDescription, description}) => {
         window.scrollTo(0,0)
     },[])
   return (
-    <div className='fixed w-full h-screen bottom-0 top-0 right-0 left-0 bg-[#000] z-[999] flex justify-center items-center px-2'>
-        <div className='text-[#fff] font-bold text-2xl absolute top-5 right-5'>
+    <div className='fixed w-full h-screen bottom-0 top-0 right-0 left-0 bg-[#f7f2ecb4] z-[999] flex justify-center items-center px-2'>
+        <div className='text-[#000] font-bold text-2xl absolute top-5 right-5'>
             <IoCloseCircleSharp className='cursor-pointer' onClick={()=>setOpenDescription(false)}/>
         </div>
       <div className='w-full px-2 Mlg:max-w-[900px] Mlg:w-full rounded-3xl GlassBg p-5'>
-        <div className='text-justify p-5 text-[#fff]'>
+        <div className='text-justify p-5 text-[#000]'>
           {description || "No description available."}
         </div>
       </div>

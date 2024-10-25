@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       screens: {
-        'xlg' : '900px',
+        'xlg' : '1000px',
         'Mlg' : '1440px',
         '2xl': '1536px',
         '3xl' : '1800px',

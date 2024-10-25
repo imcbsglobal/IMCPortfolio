@@ -26,11 +26,31 @@ const Introduction = () => {
     return () => unsubscribe();
   }, []);
 
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await signInWithEmailAndPassword(auth, email, password);
+  //     console.log('Admin Logged Successfully');
+  //     window.location.href="/"
+  //     toast.success("Admin Logged Successfully", {
+  //       position: "top-center"
+  //     });
+  //   } catch (error) {
+  //     console.error("Error logging in:", error);
+  //     toast.error("Incorrect Username or Password", {
+  //       position: "top-center"
+  //     });
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
       console.log('Admin Logged Successfully');
+      localStorage.setItem('userEmail', user.email); // Store the email in localStorage
       window.location.href="/"
       toast.success("Admin Logged Successfully", {
         position: "top-center"
@@ -42,6 +62,7 @@ const Introduction = () => {
       });
     }
   };
+
 
   return (
     <div>

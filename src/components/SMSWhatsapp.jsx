@@ -1,25 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import { db, storage } from "./Firebase";
 import { ref, onValue, remove } from "firebase/database";
 import { ref as storageRef, deleteObject } from "firebase/storage";
-import UploadFile from './UploadFile';
-import ImageView from './ImageView';
-import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './Firebase';
-import Loader from './Loader';
-import Navbar from './Navbar';
+import UploadFile from "./UploadFile";
+import ImageView from "./ImageView";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./Firebase";
+import Loader from "./Loader";
+import Navbar from "./Navbar";
 
-const Instagram = () => {
+const SMSWhatsapp = () => {
   const [images, setImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState([]);
   const [showImageView, setShowImageView] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  useEffect(()=>{
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Check if Admin is Logged In
   useEffect(() => {
@@ -30,26 +30,33 @@ const Instagram = () => {
   }, []);
 
   useEffect(() => {
-    const dbRef = ref(db, 'instagramPages');
+    const dbRef = ref(db, "smsmarketing");
     onValue(dbRef, (snapshot) => {
       const data = snapshot.val();
       const fetchedImages = [];
       for (let key in data) {
-        if (key !== 'latest') {
-          fetchedImages.push({ key, url: data[key].url, playStoreLink: data[key].playStoreLink });
+        if (key !== "latest") {
+          fetchedImages.push({
+            key,
+            url: data[key].url,
+            playStoreLink: data[key].playStoreLink,
+          });
         }
       }
       setImages(fetchedImages);
-      setLoading(false)
+      setLoading(false);
     });
   }, []);
 
   const handleDelete = async (key, url) => {
     try {
-      await remove(ref(db, `instagramPages/${key}`));
-      const imageRef = storageRef(storage, `Instagram/${url.split('/').pop().split('?')[0]}`);
+      await remove(ref(db, `smsmarketing/${key}`));
+      const imageRef = storageRef(
+        storage,
+        `smsmarketing/${url.split("/").pop().split("?")[0]}`
+      );
       await deleteObject(imageRef);
-      setImages(images.filter(image => image.key !== key));
+      setImages(images.filter((image) => image.key !== key));
     } catch (error) {
       console.error("Error deleting image:", error);
     }
@@ -65,27 +72,26 @@ const Instagram = () => {
     setShowImageView(false);
     setSelectedImage([]);
   };
-
   return (
-    <div className='w-full overflow-auto'>
-      <div className='md:flex justify-center w-full h-screen'>
-        <div className='flex'>
-          <div className='md:w-[35%] xlg:w-[400px]'>
-            <div className='h-screen fixed top-0 left-0 bottom-0 md:w-[35%] xlg:w-[300px] z-[999] md:z-50'>
-              <Navbar/>
+    <div className="w-full overflow-auto">
+      <div className="md:flex justify-center w-full h-screen">
+        <div className="flex">
+          <div className="md:w-[35%] xlg:w-[400px]">
+            <div className="h-screen fixed top-0 left-0 bottom-0 md:w-[35%] xlg:w-[300px] z-[999] md:z-50">
+              <Navbar />
             </div>
           </div>
           <div className="md:w-[75%] w-full xlg:ml-[100px] mt-5 xlg:w-full p-5">
             <section className="Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0">
               <div>
                 <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center">
-                  Instagram Pages
+                  SMS / Whatsapp Marketing
                 </div>
               </div>
 
               {user && user.email === "info@imcbsglobal.com" && (
                 <div>
-                  <UploadFile storagePath="Instagram" dbPath="instagramPages" />
+                  <UploadFile storagePath="smsmarketing" dbPath="smsmarketing" />
                 </div>
               )}
 
@@ -138,6 +144,6 @@ const Instagram = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Instagram;
+export default SMSWhatsapp;

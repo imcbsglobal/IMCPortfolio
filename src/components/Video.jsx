@@ -4,8 +4,7 @@ import { ref as dbRef, onValue, remove } from "firebase/database";
 import { onAuthStateChanged } from 'firebase/auth';
 import UploadVideo from './UploadVideo';
 import Loader from './Loader';
-import { Helmet } from 'react-helmet';
-
+import Navbar from './Navbar';
 
 const Video = () => {
   const [videos, setVideos] = useState([]);
@@ -48,62 +47,71 @@ const Video = () => {
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Video | Our Customers Love</title>
-        <meta name="description" content="Explore our diverse range of websites developed to enhance your business. View, manage, and upload your website assets with ease." />
-        <meta name="keywords" content="web development, websites, upload website, manage websites, quality web solutions,web development in wayanad, web development in kerala, wesite, website in wayanad,graphic designing in wayanad, digital marketing in wayanad, digital marketing in wayand,imc,imcbs, imc business, imc business solutions, imc wayanad, imc kerala, imc india,website kerala, web design kerala, web development kerala" />
-      </Helmet>
-
-    <div className='md:ml-[300px] lg:ml-[450px] mt-5 p-5'>
-      <section className='Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0'>
-        <div>
-          <div className='FontStyle-Top text-3xl md:text-[52px] text-[#363636]  leading-normal text-center'> Videos</div>
-        </div>
-
-        {user && (
-          <div>
-            <UploadVideo dbPath="videos" />
+    <div className='w-full overflow-auto'>
+      <div className='md:flex justify-center w-full h-screen'>
+        <div className='flex'>
+          <div className='md:w-[25%] xlg:w-[400px]'>
+            <div className=' h-screen fixed top-0 left-0 xlg:w-[400px] bottom-0 md:w-[25%] z-[999] md:z-50'>
+              <Navbar/>
+            </div>
           </div>
-        )}
-
-        {loading ? (
-          <Loader/>
-        ) : (
-          <div className='mt-5 grid grid-cols-1 xlg:grid-cols-2 gap-5 place-items-center lg:place-items-start Mlg:gap-5'>
-          {videos.map((video) => (
-            video.url && (
-              <div key={video.id} className='relative xlg:w-full Mlg:w-[400px] h-[300px] w-[300px]'>
-                <iframe 
-                  width="300" 
-                  height="300" 
-                  src={video.url} 
-                  title={`YouTube video player ${video.id}`} 
-                  frameBorder="0" 
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                  referrerPolicy="strict-origin-when-cross-origin" 
-                  className='rounded-3xl border-[1px] border-white boxShadow1 w-[300px] xlg:w-full Mlg:w-[400px]' 
-                  allowFullScreen
-                ></iframe>
-                {user && (
-                  <div className='absolute bottom-5 w-full flex justify-center'>
-                    <button 
-                      className='px-8 py-2 bg-white rounded-3xl shadow-lg font-bold text-sm'
-                      onClick={() => handleDelete(video.id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                )}
+          <div className="md:w-[75%] w-full mt-5 p-5 xlg:w-full xlg:ml-[100px]">
+            <section className="Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0">
+              <div>
+                <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636]  leading-normal text-center">
+                  {" "}
+                  Videos
+                </div>
               </div>
-            )
-          ))}
+
+              {user && user.email === "info@imcbsglobal.com" && (
+                <div>
+                  <UploadVideo dbPath="videos" />
+                </div>
+              )}
+
+              {loading ? (
+                <Loader />
+              ) : (
+                <div className="mt-5 grid grid-cols-1 xlg:grid-cols-2 gap-5 place-items-center lg:place-items-start Mlg:gap-5">
+                  {videos.map(
+                    (video) =>
+                      video.url && (
+                        <div
+                          key={video.id}
+                          className="relative xlg:w-full Mlg:w-[400px] h-[300px] w-[300px]"
+                        >
+                          <iframe
+                            width="300"
+                            height="300"
+                            src={video.url}
+                            title={`YouTube video player ${video.id}`}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            className="rounded-3xl border-[1px] border-white boxShadow1 w-[300px] xlg:w-full Mlg:w-[400px]"
+                            allowFullScreen
+                          ></iframe>
+                          {user && user.email === "info@imcbsglobal.com" && (
+                            <div className="absolute bottom-5 w-full flex justify-center">
+                              <button
+                                className="px-8 py-2 bg-white rounded-3xl shadow-lg font-bold text-sm"
+                                onClick={() => handleDelete(video.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )
+                  )}
+                </div>
+              )}
+            </section>
+          </div>
         </div>
-        )}
-        
-      </section>
+      </div>
     </div>
-    </>
   );
 };
 

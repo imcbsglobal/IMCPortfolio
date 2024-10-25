@@ -12,6 +12,8 @@ import Websites from "./components/Websites"
 import WebApplication from "./components/WebApplication"
 import Software from "./components/Software"
 import Hardware from "./components/Hardware"
+import AddAdmin from "./components/AddAdmin"
+import SMSWhatsapp from "./components/SMSWhatsapp"
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 
@@ -20,7 +22,7 @@ function App() {
 
   return (
     <Router>
-       <ConditionalNavbar />
+       {/* <ConditionalNavbar /> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/android" element={<Android />} />
@@ -35,15 +37,17 @@ function App() {
         <Route path="/websites" element={<Websites />} />
         <Route path="/instagram" element={<Instagram/>} />
         <Route path="/facebook" element={<Facebook/>} />
+        <Route path="/smsWhatsappMarketing" element={<SMSWhatsapp/>} />
+        {/* <Route path="/addAdmin" element={<AddAdmin/>} /> */}
       </Routes>
     </Router>
   )
 }
 
-function ConditionalNavbar() {
-  const location = useLocation();
-  return location.pathname !== "/introduction" ? <Navbar /> : null;
-}
+// function ConditionalNavbar() {
+//   const location = useLocation();
+//   return location.pathname !== "/introduction" ? <Navbar /> : null;
+// }
 
 
 export default App

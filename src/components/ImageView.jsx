@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { FaTimes, FaArrowLeft, FaArrowRight, FaSearchPlus, FaSearchMinus } from "react-icons/fa";
-import { Helmet } from 'react-helmet';
 
 
 const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
@@ -85,7 +84,7 @@ const ImageView = ({ urls = [], currentIndex = 0, onClose }) => {
   if (urls.length === 0 || currentIdx < 0 || currentIdx >= urls.length) return null; // Prevent rendering if no URLs or invalid index
 
   return (
-    <div className=' inset-0  bg-black bg-opacity-80 z-50 fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center h-[100vh]'>
+    <div className=' inset-0  bg-black GlassBg1 bg-opacity-80 z-50 fixed top-0 bottom-0 right-0 left-0 flex justify-center items-center h-[100vh]'>
       <div 
       className=""
       onTouchStart={handleTouchStart}
