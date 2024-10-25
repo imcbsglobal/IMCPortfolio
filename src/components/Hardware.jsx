@@ -31,6 +31,11 @@ import HardwareDescriptions from "./HardwareDescriptions";
 import HardwareEdit from "./HardwareEdit";
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
+import monitor from "../assets/monitor.png"
+import thermalPrinter from "../assets/thermalprinter.png"
+import allinone from "../assets/allinone.jpg"
+import barcodeScanner from "../assets/barcodescanner.png"
+import printingSolutions from "../assets/printingsolutions.jpeg"
 
 const Hardware = () => {
   const [images, setImages] = useState([]);
@@ -56,15 +61,15 @@ const Hardware = () => {
   
   const hardwareCategories = [
     { name: "Barcode Printers", img: printer },
-    { name: "Computers", img: scanner },
-    { name: "Monitor", img: computer },
+    { name: "Computers", img: computer },
+    { name: "Monitor", img: monitor },
     { name: "Biometric", img: biometric },
     { name: "POS", img: pos },
-    { name: "Thermal Printer", img: cctv },
+    { name: "Thermal Printer", img: thermalPrinter },
     { name: "CCTV", img: cctv },
-    { name: "Barcode Scanners", img: cctv },
-    { name: "Printing Solutions", img: cctv },
-    { name: "All In One Printer", img: cctv },
+    { name: "Barcode Scanners", img: barcodeScanner },
+    { name: "Printing Solutions", img: printingSolutions },
+    { name: "All In One Printer", img: allinone },
   ];
 
   const navigate = useNavigate();
