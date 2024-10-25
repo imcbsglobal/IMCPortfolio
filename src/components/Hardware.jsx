@@ -55,7 +55,7 @@ const Hardware = () => {
   const [brandName, setBrandName] = useState("");
   const [description, setDescription] = useState("");
   const [displayCategory, setDisplayCategory] = useState("");
-  const [activeCategory, setActiveCategory] = useState("Printers");
+  const [activeCategory, setActiveCategory] = useState("Barcode Printers");
   const [openDescription, setOpenDescription] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   
@@ -240,13 +240,13 @@ const Hardware = () => {
   return (
     <div className="w-full">
       <div className="md:flex justify-center w-full md:h-screen">
-        <div className=" grid place-items-center md:flex w-full">
+        <div className=" grid md:flex w-full">
           <div className="md:w-[35%] w-full xlg:w-[400px]">
             <div className="md:h-screen fixed w-full top-0 left-0 bottom-0 md:w-[35%] xlg:w-[400px]">
               <Navbar />
             </div>
           </div>
-          <div className="md:w-[65%] w-full mt-5 p-5 overflow-hidden">
+          <div className="md:w-[65%] w-full mt-5 p-5 overflow-auto">
             <section className="Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0 w-full">
               <div>
                 <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center">
@@ -255,11 +255,11 @@ const Hardware = () => {
               </div>
 
               {/* Categories Display */}
-              <div className="flex justify-center items-center gap-5 mb-5 overflow-x-scroll md:overflow-x-auto pl-[750px] relative z-[999] md:z-50 PaddingSize paddingLength md:pl-[740px] xlg:pl-[600px]">
+              <div className="flex justify-start items-center gap-5 mb-5 overflow-x-scroll md:overflow-x-auto relative z-[999] paddingLength px-4">
                 {hardwareCategories.map((category) => (
                   <div
                     key={category.name}
-                    className={`p-4 border rounded-lg text-center cursor-pointer hover:shadow-lg transition-shadow flex-shrink-0 w-auto ${
+                    className={`p-4 border rounded-lg text-center cursor-pointer hover:shadow-lg transition-shadow flex-shrink-0 w-[150px] h-[170px] ${
                       activeCategory === category.name
                         ? "border-[#ff7f2a] shadow-lg"
                         : ""
@@ -366,7 +366,7 @@ const Hardware = () => {
 
               {/* Items Display */}
               {activeCategory && (
-                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 Mlg:grid-cols-3 place-items-center gap-8 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 Mlg:grid-cols-3 place-items-center gap-8 mt-8 mb-5">
                   {categoryImages[activeCategory]?.map((item, index) => (
                     <div
                       key={item.key}
@@ -414,16 +414,16 @@ const Hardware = () => {
                         </div>
                         {user && user.email === "info@imcbsglobal.com" && (
                           <div className="flex gap-5 w-full justify-center items-center">
-                            <div className=" flex mt-[-50px] justify-between gap-10">
+                            <div className=" flex justify-between gap-10">
                               <button
                                 onClick={() => handleDelete(item)}
-                                className=" bg-[#f00] borde rounded-lg text-[#000] font-semibold hover:bg-gray-400 transition-colors HoverDeleting  bottom-2 p-2"
+                                className=" bg-[#f00] borde rounded-lg text-[#000] font-semibold hover:bg-gray-400 transition-colors HoverDeleting absolute  bottom-2 right-2 p-2 md:right-3"
                               >
                                 <MdDelete/>
                               </button>
                               <button 
                                 onClick={() => handleEdit(item)}
-                                className=" bg-[#00ddff] borde rounded-lg text-[#000] font-semibold hover:bg-gray-400 transition-colors HoverDeleting  bottom-14 text-center p-2"
+                                className=" bg-[#00ddff] borde rounded-lg text-[#000] font-semibold hover:bg-gray-400 transition-colors HoverDeleting absolute text-center left-2 md:left-3 bottom-2 p-2"
                               >
                               <MdEdit/>
                               </button>
