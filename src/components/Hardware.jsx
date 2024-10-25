@@ -242,11 +242,11 @@ const Hardware = () => {
       <div className="md:flex justify-center w-full md:h-screen">
         <div className=" grid md:flex w-full">
           <div className="md:w-[35%] w-full xlg:w-[400px]">
-            <div className="md:h-screen fixed w-full top-0 left-0 bottom-0 md:w-[35%] xlg:w-[400px]">
+            <div className="md:h-screen md:fixed w-full top-0 left-0 bottom-0 md:w-[35%] xlg:w-[400px] relative z-[999]">
               <Navbar />
             </div>
           </div>
-          <div className="md:w-[65%] w-full mt-5 p-5 overflow-auto">
+          <div className="md:w-[65%] w-full mt-5 p-5 overflow-auto relative z-40">
             <section className="Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0 w-full">
               <div>
                 <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center">
@@ -255,7 +255,7 @@ const Hardware = () => {
               </div>
 
               {/* Categories Display */}
-              <div className="flex justify-start items-center gap-5 mb-5 overflow-x-scroll md:overflow-x-auto relative z-[999] paddingLength px-4">
+              <div className="flex justify-start items-center gap-5 mb-5 overflow-x-scroll md:overflow-x-auto relative paddingLength px-4">
                 {hardwareCategories.map((category) => (
                   <div
                     key={category.name}

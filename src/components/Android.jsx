@@ -78,14 +78,14 @@ const handleView = (photos) => {
 
   return (
     <div className="w-full overflow-auto">
-      <div className="md:flex justify-center w-full h-screen">
-        <div className=" grid place-items-center md:flex w-full">
-          <div className="md:w-[35%] w-full xlg:w-[400px]">
-            <div className="h-screen fixed w-full top-0 left-0 bottom-0 md:w-[35%] xlg:w-[25%] z-[999] md:z-50">
-              <Navbar />
+      <div className='md:flex justify-center w-full h-screen'>
+        <div className='flex w-full'>
+          <div className='md:w-[30%] xlg:w-[400px]'>
+            <div className=' h-screen fixed top-0 left-0 bottom-0 xlg:w-[400px] md:w-[25%] z-[999] md:z-50'>
+              <Navbar/>
             </div>
           </div>
-          <div className="md:w-[65%] xlg:w-[75%] w-full md:mt-[1450px] xlg:mt-[400px] Mlg:mt-0">
+          <div className="md:w-[75%] xlg:w-full xlg:ml-[100px] w-full mt-5">
             <div className=" mt-5 p-5">
               <section className="Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0">
                 <div>

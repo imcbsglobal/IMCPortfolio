@@ -72,13 +72,13 @@ const Brochure = () => {
   return (
     <div className='w-full overflow-auto'>
       <div className='md:flex justify-center w-full h-screen'>
-        <div className='flex'>
+        <div className='flex w-full'>
           <div className='md:w-[30%] xlg:w-[400px]'>
-            <div className='h-screen fixed top-0 left-0 bottom-0 md:w-[30%] xlg:w-[400px] w-full z-[999] md:z-50'>
+            <div className=' h-screen fixed top-0 left-0 bottom-0 xlg:w-[400px] md:w-[25%] z-[999] md:z-50'>
               <Navbar/>
             </div>
           </div>
-          <div className="md:w-[75%] xlg:w-full xlg:ml-[100px] w-full mt-5 p-5">
+          <div className="md:w-[75%] xlg:w-full xlg:ml-[100px] w-full mt-5">
             <section className="Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0">
               <div>
                 <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center">
