@@ -44,15 +44,23 @@ const Websites = () => {
   }, []);
 
   const handleDelete = async (key, url) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this item?");
+  
+    if (!confirmDelete) return; // Exit the function if the user cancels
+  
     try {
       await remove(ref(db, `websites/${key}`));
+  
+      // Delete the associated image
       const imageRef = storageRef(storage, `Websites/${url.split('/').pop().split('?')[0]}`);
       await deleteObject(imageRef);
+  
       setImages(images.filter((image) => image.key !== key));
     } catch (error) {
       console.error('Error deleting image:', error);
     }
   };
+  
 
   const handleView = (index) => {
     setSelectedImage(images.map((img) => img.url)); // This remains as the array of URLs

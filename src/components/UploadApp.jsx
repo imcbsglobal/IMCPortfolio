@@ -136,13 +136,13 @@ const UploadApp = ({ storagePath, dbPath }) => {
                                 onClick={() => firstPhotoRef.current.click()}
                                 className="px-6 py-3 rounded-xl text-[#fff] border-[1px] border-white shadow-lg font-bold bg-[#ff9019]"
                             >
-                                First Photo
+                                Select Photo
                             </button>
                             {firstPhotoFile && <span className="mt-2 text-sm text-green-600">Selected</span>}
                         </div>
 
                         {/* Second Photo Selection */}
-                        <div className="flex flex-col items-center">
+                        {/* <div className="flex flex-col items-center">
                             <input 
                                 type="file" 
                                 ref={secondPhotoRef} 
@@ -157,10 +157,10 @@ const UploadApp = ({ storagePath, dbPath }) => {
                                 Second Photo
                             </button>
                             {secondPhotoFile && <span className="mt-2 text-sm text-green-600">Selected</span>}
-                        </div>
+                        </div> */}
 
                         {/* Third Photo Selection */}
-                        <div className="flex flex-col items-center">
+                        {/* <div className="flex flex-col items-center">
                             <input 
                                 type="file" 
                                 ref={thirdPhotoRef} 
@@ -175,7 +175,7 @@ const UploadApp = ({ storagePath, dbPath }) => {
                                 Third Photo
                             </button>
                             {thirdPhotoFile && <span className="mt-2 text-sm text-green-600">Selected</span>}
-                        </div>
+                        </div> */}
                         {/* Description Section */}
                         <div className='w-full flex justify-center items-center border-none outline-none'>
                         <textarea 

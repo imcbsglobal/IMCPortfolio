@@ -49,18 +49,26 @@ const SMSWhatsapp = () => {
   }, []);
 
   const handleDelete = async (key, url) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this image?");
+  
+    if (!confirmDelete) return; // Exit the function if the user cancels
+  
     try {
       await remove(ref(db, `smsmarketing/${key}`));
+      
+      // Delete the associated image
       const imageRef = storageRef(
         storage,
         `smsmarketing/${url.split("/").pop().split("?")[0]}`
       );
       await deleteObject(imageRef);
+      
       setImages(images.filter((image) => image.key !== key));
     } catch (error) {
       console.error("Error deleting image:", error);
     }
   };
+  
 
   const handleView = (urls, index) => {
     setSelectedImage(urls); // Set an array of URLs

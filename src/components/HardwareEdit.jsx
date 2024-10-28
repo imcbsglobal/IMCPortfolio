@@ -67,14 +67,14 @@ const HardwareEdit = ({ item, onClose, onUpdate }) => {
   };
 
   return (
-    <div className='fixed w-full h-screen bottom-0 top-0 right-0 left-0 bg-[#f7f2ecb4] z-[999] flex justify-center items-center px-2'>
+    <div className='fixed w-full h-screen bottom-0 top-0 right-0 left-0 backdrop-blur-sm bg-[#f7f2ecb4] z-[999] flex justify-center items-center px-2'>
       <div className='text-[#000] font-bold text-2xl absolute top-5 right-5'>
         <IoCloseCircleSharp
           className="cursor-pointer"
           onClick={onClose}
         />
       </div>
-      <div className='w-full px-2 Mlg:max-w-[900px] Mlg:w-full rounded-3xl GlassBg p-5'>
+      <div className='w-full px-2 Mlg:max-w-[900px] Mlg:w-full EditGlassBg p-5'>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <input

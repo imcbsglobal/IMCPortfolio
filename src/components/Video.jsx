@@ -36,6 +36,10 @@ const Video = () => {
   }, []);
 
   const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this video?");
+  
+    if (!confirmDelete) return; // Exit the function if the user cancels
+  
     const videoRef = dbRef(db, `videos/${id}`);
     remove(videoRef)
       .then(() => {
@@ -45,6 +49,7 @@ const Video = () => {
         console.error('Error deleting video: ', error);
       });
   };
+  
 
   return (
     <div className='w-full overflow-auto'>

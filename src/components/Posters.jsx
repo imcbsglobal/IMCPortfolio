@@ -48,15 +48,23 @@ const Posters = () => {
   }, []);
 
   const handleDelete = async (key, url) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this poster?");
+  
+    if (!confirmDelete) return; // Exit the function if the user cancels
+  
     try {
       await remove(ref(db, `posters/${key}`));
+  
+      // Delete the associated poster image
       const posterRef = storageRef(storage, `Posters/${url.split('/').pop().split('?')[0]}`);
       await deleteObject(posterRef);
+  
       setPosters(posters.filter(poster => poster.key !== key));
     } catch (error) {
       console.error("Error deleting poster:", error);
     }
   };
+  
 
   const handleView = (index) => {
     setSelectedImage(images.map(img => img.url)); // Set an array of URLs

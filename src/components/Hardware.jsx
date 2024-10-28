@@ -405,7 +405,7 @@ const Hardware = () => {
                             Brand : {item.brandName}
                           </span>
                           <span className="text-gray-600 font-medium">
-                            Modal : {item.modelName}
+                            Model : {item.modelName}
                           </span>
                           <span className="text-[#ff7f2a] font-medium flex justify-center items-center">
                             <BiRupee />

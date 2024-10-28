@@ -48,16 +48,24 @@ const Logos = () => {
   }, []);
 
   // Handle delete action
-  const handleDelete = async (key, url) => {
-    try {
-      await remove(ref(db, `logos/${key}`));
-      const logoRef = storageRef(storage, `Logos/${url.split('/').pop().split('?')[0]}`);
-      await deleteObject(logoRef);
-      setLogos(logos.filter(logo => logo.key !== key));
-    } catch (error) {
-      console.error("Error deleting logo:", error);
-    }
-  };
+const handleDelete = async (key, url) => {
+  const confirmDelete = window.confirm("Are you sure you want to delete this logo?");
+
+  if (!confirmDelete) return; // Exit the function if the user cancels
+
+  try {
+    await remove(ref(db, `logos/${key}`));
+
+    // Delete the associated logo file
+    const logoRef = storageRef(storage, `Logos/${url.split('/').pop().split('?')[0]}`);
+    await deleteObject(logoRef);
+
+    setLogos(logos.filter(logo => logo.key !== key));
+  } catch (error) {
+    console.error("Error deleting logo:", error);
+  }
+};
+
 
   // Handle view action
   const handleView = (index) => {

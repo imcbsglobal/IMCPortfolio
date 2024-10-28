@@ -258,7 +258,7 @@ textarea::-webkit-input-placeholder{
   background-color: #ffffff78;
 }
 input::-webkit-input-placeholder{
-  color: #ffff;
+  color: #2c2b2b;
 }
 select{
   color: #ffff;
@@ -303,4 +303,11 @@ select{
 .GlassBg1{
   backdrop-filter: blur(30px);
   background-color: rgb(0, 0, 0);
+}
+.EditGlassBg{
+  backdrop-filter: blur(20px);
+  background-color: #ffffff64;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding-top: 20px;
 }

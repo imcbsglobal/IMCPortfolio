@@ -55,17 +55,25 @@ const Brochure = () => {
   }, []);
 
   const handleDelete = async (key, url, thumbnailUrl, type) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this PDF and its thumbnail?");
+  
+    if (!confirmDelete) return; // Exit the function if the user cancels
+  
     try {
       await remove(ref(db, `brochures/${type}/${key}`));
+  
+      // Delete the associated PDF and thumbnail
       const fileRef = storageRef(storage, `Brochures/${type}/${url.split('/').pop().split('?')[0]}`);
       const thumbnailRef = storageRef(storage, `Brochures/thumbnails/${type}/${thumbnailUrl.split('/').pop().split('?')[0]}`);
       await deleteObject(fileRef);
       await deleteObject(thumbnailRef);
+  
       console.log("Deleted PDF and thumbnail successfully.");
     } catch (error) {
       console.error("Error deleting PDF:", error);
     }
   };
+  
 
   const filteredPdfs = pdfs.filter(pdf => pdf.type === activeType);
 
