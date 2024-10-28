@@ -16,7 +16,7 @@ const Home = () => {
     window.scrollTo(0,0)
   },[])
   return (
-    <div className=' w-full'>
+    <div className=' w-full overflow-auto'>
       <div className="md:flex justify-center w-full h-screen">
         <div className=" grid place-items-center md:flex w-full">
           <div className="md:w-[35%] w-full Mlg:w-[300px]">

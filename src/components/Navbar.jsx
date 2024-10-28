@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import NavbarMobile from './NavbarMobile';
+import React, { useState, useEffect } from "react";
+import NavbarMobile from "./NavbarMobile";
 import logo from "../assets/IMC Logo.png";
 import { TiThMenu } from "react-icons/ti";
-import { FaUserCircle, FaRulerCombined, FaUserSlash, FaYoutube } from "react-icons/fa";
+import {
+  FaUserCircle,
+  FaRulerCombined,
+  FaUserSlash,
+  FaYoutube,
+} from "react-icons/fa";
 import { MdOutlineFacebook, MdContacts } from "react-icons/md";
 import { BiLogoInstagramAlt, BiLogoFacebook } from "react-icons/bi";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -10,24 +15,27 @@ import { FaHome } from "react-icons/fa";
 import { FaEarthAmericas } from "react-icons/fa6";
 import { RiPencilRulerFill } from "react-icons/ri";
 import { CgMenuLeftAlt } from "react-icons/cg";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 import { HiPencilAlt } from "react-icons/hi";
-import { PiBookOpenTextFill, PiPencilCircleBold, PiVideoFill } from "react-icons/pi";
+import {
+  PiBookOpenTextFill,
+  PiPencilCircleBold,
+  PiVideoFill,
+} from "react-icons/pi";
 import { BsAndroid2, BsInstagram } from "react-icons/bs";
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from "react-router-dom";
 import { auth } from "./Firebase";
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged } from "firebase/auth";
 import { GrMultimedia } from "react-icons/gr";
 import { FaGlobe } from "react-icons/fa6";
 import { IoGlobeOutline } from "react-icons/io5";
 import { HiDesktopComputer } from "react-icons/hi";
 import { IoHardwareChip } from "react-icons/io5";
-import flashLogo from "../assets/flashlogo.png"
-import absyLolgo from "../assets/absylogo.png"
+import flashLogo from "../assets/flashlogo.png";
+import absyLolgo from "../assets/absylogo.png";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaCommentSms } from "react-icons/fa6";
-
 
 const Navbar = () => {
   const [menuBar, setMenuBar] = useState(false);
@@ -141,11 +149,19 @@ const Navbar = () => {
             </div>
             <div className="p-2">
               <a href="https://imcportfolio.in/">
-                <img
-                  src={logo}
-                  className="w-auto h-[50px] cursor-pointer"
-                  alt=""
-                />
+                {currentAdmin && currentAdmin.img ? (
+                  <img
+                    src={currentAdmin.img}
+                    className="w-auto h-[50px] cursor-pointer"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src={logo}
+                    className="w-auto h-[50px] cursor-pointer"
+                    alt=""
+                  />
+                )}
               </a>
             </div>
           </nav>
@@ -172,52 +188,130 @@ const Navbar = () => {
             )}
             <div className="w-[80px] h-auto mx-auto mb-5">
               <a href="https://imcportfolio.in/">
-                <img
-                  src={logo}
-                  className="w-full h-full drop-shadow-md"
-                  alt=""
-                />
+                {currentAdmin && currentAdmin.img ? (
+                  <img
+                    src={currentAdmin.img}
+                    className="w-full h-full"
+                    alt=""
+                  />
+                ) : (
+                  <img
+                    src={logo}
+                    className="w-full h-full drop-shadow-md"
+                    alt=""
+                  />
+                )}
               </a>
             </div>
-            <div className="text-center text-2xl font-semibold mb-5">
-              IMC Business Solution
-            </div>
+            {currentAdmin && currentAdmin.name ? (
+              <div className="text-center text-2xl font-semibold mb-5">
+                {currentAdmin.name}
+              </div>
+            ) : (
+              <div className="text-center text-2xl font-semibold mb-5">
+                IMC Business Solution
+              </div>
+            )}
+
             <div className="flex justify-center flex-wrap items-center gap-5 mb-5 bg-white p-5 rounded-full BoxShadow">
-            <a href="https://imcbsglobal.com/">
-                <div className="text-xl SocialHover">
-                  <FaGlobe />
-                </div>
-              </a>
-              <a href="https://www.facebook.com/profile.php?id=100069040622427">
-                <div className="text-xl SocialHover">
-                  <MdOutlineFacebook />
-                </div>
-              </a>
-              <a href="https://www.instagram.com/imcbusinesssolution/">
-                <div className="text-xl SocialHover">
-                  <BiLogoInstagramAlt />
-                </div>
-              </a>
-              <a href="https://wa.me/917593820005">
-                <div className="text-xl SocialHover">
-                  <IoLogoWhatsapp />
-                </div>
-              </a>
-              <a href="https://www.youtube.com/@IMCBUSINESSSOLUTIONS">
-                <div className="text-xl SocialHover">
-                  <FaYoutube />
-                </div>
-              </a>
-              <a href="https://www.linkedin.com/in/imc-business-solutions-0b0066335/">
-                <div className="text-xl SocialHover">
-                  <FaLinkedinIn />
-                </div>
-              </a>
-              <a href="https://x.com/imcbsblobal">
-                <div className="text-xl SocialHover">
-                  <FaXTwitter />
-                </div>
-              </a>
+              {currentAdmin ? (
+                <>
+                  {currentAdmin && currentAdmin.website && (
+                    <a href={currentAdmin.website}>
+                      <div className="text-xl SocialHover">
+                        <FaGlobe />
+                      </div>
+                    </a>
+                  )}
+
+                  {currentAdmin && currentAdmin.facebook && (
+                    <a href={currentAdmin.facebook}>
+                      <div className="text-xl SocialHover">
+                        <MdOutlineFacebook />
+                      </div>
+                    </a>
+                  )}
+                  
+                  {currentAdmin && currentAdmin.instagram && (
+                    <a href={currentAdmin.instagram}>
+                      <div className="text-xl SocialHover">
+                        <BiLogoInstagramAlt />
+                      </div>
+                    </a>
+                  )}
+                  
+                  {currentAdmin && currentAdmin.whatasapp && (
+                    <a href={currentAdmin.whatasapp}>
+                      <div className="text-xl SocialHover">
+                        <IoLogoWhatsapp />
+                      </div>
+                    </a>
+                  )}
+                  
+                  {currentAdmin && currentAdmin.youtube && (
+                    <a href={currentAdmin.youtube}>
+                      <div className="text-xl SocialHover">
+                        <FaYoutube />
+                      </div>
+                    </a>
+                  )}
+                  
+                  {currentAdmin && currentAdmin.linkedIn && (
+                    <a href={currentAdmin.linkedIn}>
+                      <div className="text-xl SocialHover">
+                        <FaLinkedinIn />
+                      </div>
+                    </a>
+                  )}
+                  
+                  {currentAdmin && currentAdmin.X && (
+                    <a href={currentAdmin.X}>
+                      <div className="text-xl SocialHover">
+                        <FaXTwitter />
+                      </div>
+                    </a>
+                  )}
+                  
+                </>
+              ) : (
+                <>
+                  <a href="https://imcbsglobal.com/">
+                    <div className="text-xl SocialHover">
+                      <FaGlobe />
+                    </div>
+                  </a>
+                  <a href="https://www.facebook.com/profile.php?id=100069040622427">
+                    <div className="text-xl SocialHover">
+                      <MdOutlineFacebook />
+                    </div>
+                  </a>
+                  <a href="https://www.instagram.com/imcbusinesssolution/">
+                    <div className="text-xl SocialHover">
+                      <BiLogoInstagramAlt />
+                    </div>
+                  </a>
+                  <a href="https://wa.me/917593820005">
+                    <div className="text-xl SocialHover">
+                      <IoLogoWhatsapp />
+                    </div>
+                  </a>
+                  <a href="https://www.youtube.com/@IMCBUSINESSSOLUTIONS">
+                    <div className="text-xl SocialHover">
+                      <FaYoutube />
+                    </div>
+                  </a>
+                  <a href="https://www.linkedin.com/in/imc-business-solutions-0b0066335/">
+                    <div className="text-xl SocialHover">
+                      <FaLinkedinIn />
+                    </div>
+                  </a>
+                  <a href="https://x.com/imcbsblobal">
+                    <div className="text-xl SocialHover">
+                      <FaXTwitter />
+                    </div>
+                  </a>
+                </>
+              )}
             </div>
             <div className="flex justify-center text-center items-center">
               <ul className="flex flex-col gap-5 font-semibold items-start justify-start">
@@ -468,6 +562,6 @@ const Navbar = () => {
       </header>
     </div>
   );
-}
+};
 
 export default Navbar;
