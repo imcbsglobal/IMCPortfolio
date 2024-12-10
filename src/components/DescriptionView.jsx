@@ -10,8 +10,8 @@ const DescriptionView = ({setOpenDescription, description}) => {
         <div className='text-[#000] font-bold text-2xl absolute top-5 right-5'>
             <IoCloseCircleSharp className='cursor-pointer' onClick={()=>setOpenDescription(false)}/>
         </div>
-      <div className='w-full px-2 Mlg:max-w-[900px] Mlg:w-full rounded-3xl GlassBg p-5'>
-        <div className='text-justify p-5 text-[#000]'>
+      <div className='w-full px-2 Mlg:max-w-[900px] Mlg:w-full rounded-3xl GlassBg2 p-5'>
+        <div className='text-justify p-5 text-[#fff]'>
           {description || "No description available."}
         </div>
       </div>

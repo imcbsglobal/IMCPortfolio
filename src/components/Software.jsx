@@ -89,7 +89,7 @@ const Software = () => {
       <div className="md:flex justify-center w-full h-screen">
         <div className="flex w-full">
           <div className="md:w-[30%] xlg:w-[400px]">
-            <div className=" h-screen fixed top-0 left-0 bottom-0 xlg:w-[400px] md:w-[25%] z-[999] md:z-50">
+            <div className=" h-screen fixed top-0 left-0 bottom-0 xlg:w-[400px] md:w-[25%] z-50 md:z-50">
               <Navbar />
             </div>
           </div>
@@ -202,6 +202,7 @@ const Software = () => {
 
                 {showImageView && (
                   <AppImageView
+                    dbPath="software"
                     photos={selectedPhotos}
                     softwareKey={selectedKey} // Pass the selected software's key
                     onClose={() => {

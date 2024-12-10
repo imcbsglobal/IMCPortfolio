@@ -36,6 +36,7 @@ import thermalPrinter from "../assets/thermalprinter.png"
 import allinone from "../assets/allinone.jpg"
 import barcodeScanner from "../assets/barcodescanner.png"
 import printingSolutions from "../assets/printingsolutions.jpeg"
+import pdt from "../assets/pdt.png"
 
 const Hardware = () => {
   const [images, setImages] = useState([]);
@@ -65,6 +66,7 @@ const Hardware = () => {
     { name: "Monitor", img: monitor },
     { name: "Biometric", img: biometric },
     { name: "POS", img: pos },
+    { name: "PDT", img: pdt },
     { name: "Thermal Printer", img: thermalPrinter },
     { name: "CCTV", img: cctv },
     { name: "Barcode Scanners", img: barcodeScanner },
@@ -242,11 +244,11 @@ const Hardware = () => {
       <div className="md:flex justify-center w-full md:h-screen">
         <div className=" grid md:flex w-full">
           <div className="md:w-[35%] w-full xlg:w-[400px]">
-            <div className="md:h-screen md:fixed w-full top-0 left-0 bottom-0 md:w-[35%] xlg:w-[400px] relative z-[999]">
+            <div className="md:h-screen md:fixed w-full top-0 left-0 bottom-0 md:w-[35%] xlg:w-[400px] z-40 relative">
               <Navbar />
             </div>
           </div>
-          <div className="md:w-[65%] w-full mt-5 p-5 overflow-auto relative z-40">
+          <div className="md:w-[65%] w-full mt-5 p-5 overflow-auto relative z-30">
             <section className="Mlg:max-w-[1200px] Mlg:mx-auto mt-16 md:mt-0 w-full">
               <div>
                 <div className="FontStyle-Top text-3xl md:text-[52px] text-[#363636] mb-5 leading-normal text-center">
@@ -435,26 +437,6 @@ const Hardware = () => {
                   ))}
                 </div>
               )}
-
-              {/* Image Viewer Modal */}
-              {showImageView && (
-                <HardwareImageView
-                  urls={selectedImageUrls}
-                  currentIndex={currentImageIndex}
-                  onClose={() => {
-                    setShowImageView(false);
-                    setSelectedImageUrls([]);
-                    setSelectedImageData([]);
-                    setCurrentImageIndex(0);
-                  }}
-                  onDelete={(index) => {
-                    if (selectedImageData[index]) {
-                      handleDelete(selectedImageData[index]);
-                    }
-                  }}
-                  canDelete={user && user.email === "info@imcbsglobal.com"}
-                />
-              )}
             </section>
           </div>
         </div>
@@ -476,6 +458,28 @@ const Hardware = () => {
           }}
         />
       )}
+
+      {/* Image Viewer Modal */}
+      {showImageView && (
+                <div className="relative z-[999]">
+                  <HardwareImageView
+                  urls={selectedImageUrls}
+                  currentIndex={currentImageIndex}
+                  onClose={() => {
+                    setShowImageView(false);
+                    setSelectedImageUrls([]);
+                    setSelectedImageData([]);
+                    setCurrentImageIndex(0);
+                  }}
+                  onDelete={(index) => {
+                    if (selectedImageData[index]) {
+                      handleDelete(selectedImageData[index]);
+                    }
+                  }}
+                  canDelete={user && user.email === "info@imcbsglobal.com"}
+                />
+                </div>
+              )}
     </div>
   );
 };

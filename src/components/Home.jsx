@@ -16,15 +16,15 @@ const Home = () => {
     window.scrollTo(0,0)
   },[])
   return (
-    <div className=' w-full overflow-auto'>
-      <div className="md:flex justify-center w-full h-screen">
-        <div className=" grid place-items-center md:flex w-full">
-          <div className="md:w-[35%] w-full Mlg:w-[300px]">
-            <div className="h-screen fixed w-full top-0 left-0 bottom-0 md:w-[35%] Mlg:w-[300px] z-[999]">
+    <div className='w-full overflow-auto'>
+      <div className='md:flex justify-center w-full h-screen'>
+        <div className='flex w-full'>
+          <div className='md:w-[30%] xlg:w-[400px]'>
+            <div className=' h-screen fixed top-0 left-0 bottom-0 xlg:w-[400px] md:w-[25%] z-50 md:z-50'>
               <Navbar/>
             </div>
           </div>
-        <div className='flex justify-center items-center md:pt-20 md:w-[60%] xlg:w-[60%] Mlg:ml-[100px] Mlg:w-full '>
+          <div className="md:w-[75%] xlg:w-full xlg:ml-[100px] w-full mt-5">
           <div className='relative pt-20 md:pt-0  flex flex-col justify-center items-center'>
           <div className=' mt-5 px-5 grid place-items-center Mlg:flex  justify-center items-end gap-5 mb-5'>
             <div className='mb-5 lg:w-[600px]'>

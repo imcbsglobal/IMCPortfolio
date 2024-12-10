@@ -30,6 +30,8 @@ import absyLolgo from "../assets/absylogo.png";
 import { FaCommentSms } from "react-icons/fa6";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
+import { MdLeaderboard } from "react-icons/md";
+
 
 const NavbarMobile = ({ setMenuBar }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -189,6 +191,12 @@ const NavbarMobile = ({ setMenuBar }) => {
                         </div>
                     </a>
                 )}
+
+                  <a href="https://sysmac.co.in/">
+                      <div className="text-xl">
+                        <MdLeaderboard />
+                      </div>
+                  </a>
               </>
             ) : (
               <>
@@ -228,6 +236,11 @@ const NavbarMobile = ({ setMenuBar }) => {
                     <FaXTwitter />
                   </div>
                 </a>
+                <a href="https://sysmac.co.in/">
+                      <div className="text-xl ">
+                        <MdLeaderboard />
+                      </div>
+                  </a>
               </>
             )}
           </div>

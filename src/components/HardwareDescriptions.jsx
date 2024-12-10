@@ -19,8 +19,8 @@ const HardwareDescriptions = ({ setOpenDescription, openDescription, description
                     onClick={handleClose}  // Move onClick to the icon itself and use the new handler
                 />
             </div>
-            <div className='w-full px-2 Mlg:max-w-[900px] Mlg:w-full rounded-3xl GlassBg p-5'>
-                <div className='text-justify p-5 text-[#000]'>
+            <div className='w-full px-2 Mlg:max-w-[900px] Mlg:w-full rounded-3xl GlassBg2 p-5'>
+                <div className='text-justify p-5 text-[#fff]'>
                     {description || "No description available."}
                 </div>
             </div>

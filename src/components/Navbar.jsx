@@ -36,6 +36,7 @@ import absyLolgo from "../assets/absylogo.png";
 import { FaLinkedinIn } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaCommentSms } from "react-icons/fa6";
+import { MdLeaderboard } from "react-icons/md";
 
 const Navbar = () => {
   const [menuBar, setMenuBar] = useState(false);
@@ -127,7 +128,7 @@ const Navbar = () => {
 
   return (
     <div className="fixed ">
-      <header className=" m-0 p-0 fixed w-full z-[999]">
+      <header className=" m-0 p-0 fixed w-full">
         {menuBar && <NavbarMobile setMenuBar={setMenuBar} />}
         <div className=" relative ">
           <nav className="flex items-center justify-between px-8 md:hidden bg-[#fff] rounded-3xl GlassBg">
@@ -272,6 +273,11 @@ const Navbar = () => {
                     </a>
                   )}
                   
+                  <a href="https://sysmac.co.in/">
+                      <div className="text-xl SocialHover">
+                        <MdLeaderboard />
+                      </div>
+                  </a>
                 </>
               ) : (
                 <>
@@ -309,6 +315,11 @@ const Navbar = () => {
                     <div className="text-xl SocialHover">
                       <FaXTwitter />
                     </div>
+                  </a>
+                  <a href="https://sysmac.co.in/">
+                      <div className="text-xl SocialHover">
+                        <MdLeaderboard />
+                      </div>
                   </a>
                 </>
               )}
