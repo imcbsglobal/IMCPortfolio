@@ -192,7 +192,7 @@ const NavbarMobile = ({ setMenuBar }) => {
                     </a>
                 )}
 
-                  <a href="https://sysmac.co.in/">
+                  <a href="https://ssm.imcbs.com/">
                       <div className="text-xl">
                         <MdLeaderboard />
                       </div>
@@ -236,7 +236,7 @@ const NavbarMobile = ({ setMenuBar }) => {
                     <FaXTwitter />
                   </div>
                 </a>
-                <a href="https://sysmac.co.in/">
+                <a href="https://ssm.imcbs.com/">
                       <div className="text-xl ">
                         <MdLeaderboard />
                       </div>

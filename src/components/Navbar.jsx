@@ -273,7 +273,7 @@ const Navbar = () => {
                     </a>
                   )}
                   
-                  <a href="https://sysmac.co.in/">
+                  <a href="https://ssm.imcbs.com/">
                       <div className="text-xl SocialHover">
                         <MdLeaderboard />
                       </div>
@@ -316,7 +316,7 @@ const Navbar = () => {
                       <FaXTwitter />
                     </div>
                   </a>
-                  <a href="https://sysmac.co.in/">
+                  <a href="https://ssm.imcbs.com/">
                       <div className="text-xl SocialHover">
                         <MdLeaderboard />
                       </div>
