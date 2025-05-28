@@ -138,40 +138,40 @@ const NavbarMobile = ({ setMenuBar }) => {
               IMC Business Solutions
             </div>
           )}
-          <div className="flex justify-center items-center gap-10 mb-5 bg-white p-5 rounded-full BoxShadow">
+          <div className="flex justify-center items-center gap-5 mb-5 bg-white p-5 rounded-full BoxShadow">
             {currentAdmin ? (
               <>
                 {currentAdmin && currentAdmin.website && (
                     <a href="https://imcbsglobal.com/">
-                        <div className="text-xl ">
+                        <div className="">
                         <FaGlobe />
                         </div>
                     </a>
                 )}
                 {currentAdmin && currentAdmin.facebook && (
                     <a href="https://www.facebook.com/profile.php?id=100069040622427">
-                        <div className="text-xl ">
+                        <div className="">
                         <MdOutlineFacebook />
                         </div>
                     </a>
                 )}
                 {currentAdmin && currentAdmin.instagram && (
                     <a href="https://www.instagram.com/imcbusinesssolution/">
-                        <div className="text-xl ">
+                        <div className="">
                         <BiLogoInstagramAlt />
                         </div>
                     </a>
                 )}
                 {currentAdmin && currentAdmin.whatasapp && (
                     <a href="https://wa.me/917593820005">
-                        <div className="text-xl ">
+                        <div className=" ">
                         <IoLogoWhatsapp />
                         </div>
                     </a>
                 )}
                 {currentAdmin && currentAdmin.youtube && (
                     <a href="https://www.youtube.com/@IMCBUSINESSSOLUTIONS">
-                        <div className="text-xl ">
+                        <div className="">
                         <FaYoutube />
                         </div>
                     </a>
@@ -179,21 +179,21 @@ const NavbarMobile = ({ setMenuBar }) => {
 
                 {currentAdmin && currentAdmin.linkedIn && (
                     <a href="https://www.linkedin.com/in/imc-business-solutions-0b0066335/">
-                    <div className="text-xl ">
+                    <div className="">
                       <FaLinkedinIn />
                     </div>
                   </a>
                 )}
                 {currentAdmin && currentAdmin.X && (
                     <a href="https://x.com/imcbsblobal">
-                        <div className="text-xl ">
+                        <div className="">
                         <FaXTwitter />
                         </div>
                     </a>
                 )}
 
-                  <a href="https://ssm.imcbs.com/">
-                      <div className="text-xl">
+                  <a href="https://myimc.in/">
+                      <div className="">
                         <MdLeaderboard />
                       </div>
                   </a>
@@ -201,33 +201,33 @@ const NavbarMobile = ({ setMenuBar }) => {
             ) : (
               <>
                 <a href="https://imcbsglobal.com/">
-                  <div className="text-xl ">
+                  <div className=" ">
                     <FaGlobe />
                   </div>
                 </a>
                 <a href="https://www.facebook.com/profile.php?id=100069040622427">
-                  <div className="text-xl ">
+                  <div className="">
                     <MdOutlineFacebook />
                   </div>
                 </a>
                 <a href="https://www.instagram.com/imcbusinesssolution/">
-                  <div className="text-xl ">
+                  <div className="">
                     <BiLogoInstagramAlt />
                   </div>
                 </a>
                 <a href="https://wa.me/917593820005">
-                  <div className="text-xl ">
+                  <div className="">
                     <IoLogoWhatsapp />
                   </div>
                 </a>
                 <a href="https://www.youtube.com/@IMCBUSINESSSOLUTIONS">
-                  <div className="text-xl ">
+                  <div className=" ">
                     <FaYoutube />
                   </div>
                 </a>
 
                 <a href="https://www.linkedin.com/in/imc-business-solutions-0b0066335/">
-                  <div className="text-xl ">
+                  <div className="">
                     <FaLinkedinIn />
                   </div>
                 </a>
@@ -236,8 +236,8 @@ const NavbarMobile = ({ setMenuBar }) => {
                     <FaXTwitter />
                   </div>
                 </a>
-                <a href="https://ssm.imcbs.com/">
-                      <div className="text-xl ">
+                <a href="https://myimc.in/">
+                      <div className="">
                         <MdLeaderboard />
                       </div>
                   </a>

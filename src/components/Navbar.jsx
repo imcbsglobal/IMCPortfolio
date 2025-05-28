@@ -316,7 +316,7 @@ const Navbar = () => {
                       <FaXTwitter />
                     </div>
                   </a>
-                  <a href="https://ssm.imcbs.com/">
+                  <a href="https://myimc.in/">
                       <div className="text-xl SocialHover">
                         <MdLeaderboard />
                       </div>

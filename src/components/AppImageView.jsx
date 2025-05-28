@@ -10,17 +10,29 @@ import { MdDelete } from "react-icons/md";
 import { storage, db } from './Firebase';
 import { ref as storageRef, deleteObject } from 'firebase/storage';
 import { ref as dbRef, get, update } from 'firebase/database';
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./Firebase";
 
 const AppImageView = ({ photos = [], onClose, softwareKey, dbPath }) => {
+  const [user, setUser] = useState(null);
   const [currentIdx, setCurrentIdx] = useState(0);
   const [showContent, setShowContent] = useState(true);
   const [zoom, setZoom] = useState(1);
   const [startX, setStartX] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowLeft") handlePrev();
       if (e.key === "ArrowRight") handleNext();
@@ -171,13 +183,17 @@ const AppImageView = ({ photos = [], onClose, softwareKey, dbPath }) => {
           >
             <FaSearchMinus />
           </button>
-          <button 
-            onClick={handleDelete}
-            className="text-white text-2xl cursor-pointer z-10"
-            disabled={isDeleting}
-          >
-            <MdDelete />
-          </button>
+
+          {/* Delete Button (Only Visible to "info@imcbsglobal.com") */}
+          {user && user.email === "info@imcbsglobal.com" && (
+            <button
+              onClick={handleDelete}
+              className="text-white text-2xl cursor-pointer z-10"
+              disabled={isDeleting}
+            >
+              <MdDelete />
+            </button>
+          )}
         </div>
       </div>
     </div>
