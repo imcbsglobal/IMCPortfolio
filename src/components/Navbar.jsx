@@ -80,7 +80,7 @@ const Navbar = () => {
       instagram: "https://www.instagram.com/imcbusinesssolution/",
       whatasapp: "https://wa.me/917593820005 ",
       youtube: "https://www.youtube.com/@IMCBUSINESSSOLUTIONS",
-      website: "https://imcbsglobal.com/",
+      website: "https://imcbs.com/",
       linkedIn: "",
       X: "",
     },
@@ -281,7 +281,7 @@ const Navbar = () => {
                 </>
               ) : (
                 <>
-                  <a href="https://imcbsglobal.com/">
+                  <a href="https://imcbs.com/">
                     <div className="text-xl SocialHover">
                       <FaGlobe />
                     </div>
